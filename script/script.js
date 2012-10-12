@@ -22,6 +22,8 @@ function addErrors(msgString){
     $("#dialog").dialog({ height: h, width: w, position: { my: "center bottom", at: "center bottom", of: containerDiv} }); //adds the dialog box
 	$("div.ui-dialog-titlebar").css("height", ".9em"); //reduces the height of the title bar
 	$("div.ui-dialog").css("font-size", "13px"); //reduces the text size of the message 
+	$("div.ui-dialog").css("border", "2px solid #DDD"); //adds a gray border
+
 
 }
 
