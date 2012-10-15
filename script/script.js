@@ -15,6 +15,9 @@ function addErrors(msgString){
 	
 	$(containerDiv).append('<div id ="dialog" title="Errors"></div>'); //appends the errors div to the container declared above
 
+
+	$(containerDiv).append('<div id ="dialog" title="Errors"></div>'); //appends the errors div to the container declared above
+
     var w = $(containerDiv).width() - 15;  //calculates the necessary width relative to the container div
     var h = $(containerDiv).height() * .30;  //calculates the necessary height relative to the container div
 
