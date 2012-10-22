@@ -1,49 +1,47 @@
 
 var containerDiv; 	//stores parent div
-var finalMsg; 		//stores final single-line message for display
+var finalShortMsg; 	//stores final single-line message for display
 var fullMsg; 		//stores final full message for display if user chooses to view
 
 function init(){
-	//assigning temporary message strings for testing
+	//assigning temporary message strings (for testing only)
 	var longMsg = "This is a string of errors \n with a second line of errors \n and a third line of errors \n and a fourth \n and \n and \n and then \n and some more \n and even more \n and \n and \n and \n blah blah blah";  
 	var shortMsg = "This is a short message";
 	
+	//find the parent div to append the message dialog to
+	containerDiv = "#" + $("#errorDisplay").parent().attr("id");
+
 	//adds the error display message box on page load
 	addErrors(longMsg); 
 
-}
 
+}
 
 function addErrors(msgString, shortMsgString){
 	//replace the unrecognized new line characters with line breaks 
 	fullMsg =  msgString.replace(/\n\r?/g, '<br />'); 
 	
 
-
 	//split the full message and return the first line only to display
 	var firstLine = function(){
 		var splitMsg = msgString.split("\n");
-		finalMsg = splitMsg[0];
+		finalShortMsg = splitMsg[0];
 		return splitMsg[0];
 		}
 
-
 	//if shortMsgString exists, use it for final message, else use msgString
-	finalMsg = (shortMsgString != null) ? shortMsgString : firstLine; 
-
-
-	//find the parent div to append the message dialog to
-	containerDiv = "#" + $("#errorDisplay").parent().attr("id"); 
-
+	finalShortMsg = (shortMsgString != null) ? shortMsgString : firstLine; 
+ 
 	//only create error message dialog if errors exist
 	if (msgString != null){ 
-		addDisplay(finalMsg);
+		addDisplay(finalShortMsg);
 	}
 
 }
 
 function addDisplay(msg){
-		$("head").append("<style> .xbutton { text-decoration : none; font-size : 15px} .detailsButton{margin-left : 10px}</style>"); //add css to the html page
+		//add css to the html page
+		$("head").append("<style> .xbutton { text-decoration : none; font-size : 15px} .detailsButton{margin-left : 10px}</style>"); 
 		
 		//add the scrollbox class with css to the error display div
 		$("#errorDisplay").addClass("scrollbox").css({"font-family" :  "Helvetica, sans-serif", 
@@ -78,34 +76,37 @@ function addDisplay(msg){
 		
 
 		//set the x button click event
-		$('.xbutton').click(function(event) {
+		$(".xbutton").click(function(event) {
   			event.preventDefault();
 			$(".scrollbox").empty().append("To retrieve errors at a later time, please click Alt+E");
-			$("#errorDisplay").fadeOut(3000);
+			$("#errorDisplay").fadeOut(3000, function(){
+				//allow the user to retrieve the message after fade out has completed
+				retrieve(); 
+			});
 		});
 
 		//set the show details button click event
-		$(".detailsButton").bind('click', function(event) {
+		$(".detailsButton").bind("click", function(event) {
     			alert(fullMsg);
-		});
-
-		$(document).keydown(function(e) {
-    		if (e.altKey && (e.which === 69 || e.which === 101)){  //detect alt + e or alt + E keypress
-        		e.preventDefault();
-       		 	retrieve();
-    		}
-		}); 
+		});		 
 }
+
 
 function retrieve(){
-	alert(finalMsg);
+	//remove the retrieval message
+	$(".scrollbox").empty(); 
+	$(document).keydown(function(e) {
+		//detect alt + e or alt + E keypress
+    	if (e.altKey && (e.which === 69 || e.which === 101)){  
+        	e.preventDefault(); 
+        	//fade the error display div back in
+       		$("#errorDisplay").fadeIn(3000); 
+       		//add the short error message back to the div
+       		addDisplay(finalShortMsg); 	
+    	}
+    });
 }
 
-
-
-
-//alt = 18
-// e = 69
 
 
 
