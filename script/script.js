@@ -13,9 +13,8 @@ function init(){
 
 	//adds the error display message box on page load
 	addErrors(longMsg); 
-
-
 }
+
 
 function addErrors(msgString, shortMsgString){
 	//replace the unrecognized new line characters with line breaks 
@@ -39,9 +38,12 @@ function addErrors(msgString, shortMsgString){
 
 }
 
+
 function addDisplay(msg){
 		//add css to the html page
-		$("head").append("<style> .xbutton { text-decoration : none; font-size : 15px} .detailsButton{margin-left : 10px}</style>"); 
+		$("head").append("<style> .xbutton { text-decoration : none; font-size : 15px} \
+								  .detailsButton{margin-left : 10px} \
+						  </style>"); 
 		
 		//add the scrollbox class with css to the error display div
 		$("#errorDisplay").addClass("scrollbox").css({"font-family" :  "Helvetica, sans-serif", 
@@ -77,36 +79,50 @@ function addDisplay(msg){
 
 		//set the x button click event
 		$(".xbutton").click(function(event) {
-  			event.preventDefault();
 			$(".scrollbox").empty().append("To retrieve errors at a later time, please click Alt+E");
-			$("#errorDisplay").fadeOut(3000, function(){
-				//allow the user to retrieve the message after fade out has completed
-				retrieve(); 
-			});
+  			removeErrorDisplay();
 		});
 
 		//set the show details button click event
 		$(".detailsButton").bind("click", function(event) {
-    			alert(fullMsg);
+    			showDetails();
 		});		 
 }
 
+function showDetails(){
+	removeErrorDisplay();
+	//alert(fullMsg);
+	//$(containerDiv).append("<div id ='messageDisplay'>" + fullMsg + "</div>");
+}
 
 function retrieve(){
 	//remove the retrieval message
+
 	$(".scrollbox").empty(); 
 	$(document).keydown(function(e) {
 		//detect alt + e or alt + E keypress
     	if (e.altKey && (e.which === 69 || e.which === 101)){  
         	e.preventDefault(); 
-        	//fade the error display div back in
-       		$("#errorDisplay").fadeIn(3000); 
-       		//add the short error message back to the div
-       		addDisplay(finalShortMsg); 	
+        	if ($("#errorDisplay").is(':hidden')){ //prevent duplicated errors
+	        	//fade the error display div back in
+	       		$("#errorDisplay").show(); 
+	       		//add the short error message back to the div
+	       		addDisplay(finalShortMsg); 
+       		}	
     	}
     });
+
 }
 
+function removeErrorDisplay(action){
+	event.preventDefault();
+
+	
+	$("#errorDisplay").fadeOut(3000, function(){
+		//allow the user to retrieve the message after fade out has completed
+		retrieve(); 
+	});
+}
 
 
 
