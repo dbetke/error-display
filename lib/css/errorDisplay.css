@@ -1,0 +1,22 @@
+.errorDisplay_initial {
+	font-family :  Helvetica, sans-serif;
+	background-color : #CCCCFF;
+	text-align : left; 
+	font-size : 12px;
+	line-height : 12px; 
+	height : 20px;
+	padding : 5px;
+	position: relative;
+}
+
+.errorDisplay_xbutton { 
+	text-decoration : none; 
+	font-size : 15px;
+	float: right;
+} 
+
+.errorDisplay_detailsButton {
+	margin-left: 10px;
+	margin-right: 10px;
+	position: relative;
+} 

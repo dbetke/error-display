@@ -41,52 +41,37 @@ function addErrors(msgString, shortMsgString){
 
 function addDisplay(msg){
 		//add css to the html page
-		$("head").append("<style> .xbutton { text-decoration : none; font-size : 15px} \
-								  .detailsButton{margin-left : 10px} \
-						  </style>"); 
+		$("head").append("<link rel='stylesheet' type='text/css' href='lib/css/errorDisplay.css' />"); 
 		
-		//add the scrollbox class with css to the error display div
-		$("#errorDisplay").addClass("scrollbox").css({"font-family" :  "Helvetica, sans-serif", 
-													  "background-color": "#CCCCFF",
-													  "text-align" : "left", 
-													  "font-size" : "12px",
-													  "line-height" : "12px", 
-													  "height" : "20px", 
-													  "padding" : "5px", 
-													  "position": "relative"}); 
+		//add the error display box class with css to the error display div
+		$("#errorDisplay").addClass("errorDisplay_initial"); 
 		//calculate to use for positioning relative to top of outer div
 		var h = $(containerDiv).height() - 40; 
 	  
-		//set the scrollbox to the bottom of the outer div utilizing the top attribute
-	    $(".scrollbox").css("top", h); 
-
-	    //add the options div to the error display div 
-		$("#errorDisplay").append("<div id ='options'></div>"); 
-
-		//assign css to the options div
-		$("#options").css({ "text-align" : "right",
-							"float" : "right"}); 
+		//set the error display box to the bottom of the outer div utilizing the top attribute
+	    $(".errorDisplay_initial").css("top", h); 
 
 		//append the show details button
-		$("#options").append("<button id='details' class='detailsButton'>See Details</button>&nbsp;&nbsp;"); 
+		$(".errorDisplay_initial").append("<button id='details' class='errorDisplay_detailsButton'>See Details</button>"); 
 
 		//append the x button
-		$("#options").append("<a href='' class='xbutton'>&#10006;</a>"); 
+		$(".errorDisplay_initial").append("<a href='' class='errorDisplay_xbutton'>&#10006;</a>");
 
 		//add the single-line message to the screen
-		$(".scrollbox").append("<span class='message'>").append(msg).append("</span>"); 
+		$(".errorDisplay_initial").append("<span class='errorDisplayInitialMessage'>").append(msg).append("</span>"); 
 		
+		//set the show details button click event
+		$(".errorDisplay_detailsButton").bind("click", function(event) {
+    			showDetails();
+		});
 
 		//set the x button click event
-		$(".xbutton").click(function(event) {
-			$(".scrollbox").empty().append("To retrieve errors at a later time, please click Alt+E");
+		$(".errorDisplay_xbutton").click(function(event) {
+			$(".errorDisplay_initial").empty().append("To retrieve errors at a later time, please click Alt+E");
   			removeErrorDisplay();
 		});
 
-		//set the show details button click event
-		$(".detailsButton").bind("click", function(event) {
-    			showDetails();
-		});		 
+				 
 }
 
 function showDetails(){
@@ -98,7 +83,7 @@ function showDetails(){
 function retrieve(){
 	//remove the retrieval message
 
-	$(".scrollbox").empty(); 
+	$(".errorDisplay_initial").empty(); 
 	$(document).keydown(function(e) {
 		//detect alt + e or alt + E keypress
     	if (e.altKey && (e.which === 69 || e.which === 101)){  
