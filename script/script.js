@@ -13,6 +13,7 @@ function init(){
 
 	//adds the error display message box on page load
 	addErrors(longMsg); 
+
 }
 
 
@@ -68,7 +69,7 @@ function addDisplay(msg){
 		//set the x button click event
 		$(".errorDisplay_xbutton").click(function(event) {
 			$(".errorDisplay_initial").empty().append("To retrieve errors at a later time, please click Alt+E");
-  			removeErrorDisplay();
+  			fadeErrorDisplay();
 		});
 
 				 
@@ -76,8 +77,14 @@ function addDisplay(msg){
 
 function showDetails(){
 	removeErrorDisplay();
-	//alert(fullMsg);
-	//$(containerDiv).append("<div id ='messageDisplay'>" + fullMsg + "</div>");
+	$("body").append("<div class = 'detailsDisplay'></div>");
+	$(".detailsDisplay").append("<a href='' class='errorDisplay_xbutton'>&#10006;</a>");
+	$(".detailsDisplay").append(fullMsg);
+	//set the x button click event
+		$(".errorDisplay_xbutton").click(function(event) {
+			$(".detailsDisplay").empty().append("To retrieve errors at a later time, please click Alt+E");
+  			removeDetailsDisplay();
+		});
 }
 
 function retrieve(){
@@ -89,7 +96,7 @@ function retrieve(){
     	if (e.altKey && (e.which === 69 || e.which === 101)){  
         	e.preventDefault(); 
         	if ($("#errorDisplay").is(':hidden')){ //prevent duplicated errors
-	        	//fade the error display div back in
+	        	//show the errorDisplay div
 	       		$("#errorDisplay").show(); 
 	       		//add the short error message back to the div
 	       		addDisplay(finalShortMsg); 
@@ -99,16 +106,32 @@ function retrieve(){
 
 }
 
-function removeErrorDisplay(action){
-	event.preventDefault();
-
-	
+//fade the error display, while showing user retrieval instructions
+function fadeErrorDisplay(){
+	event.preventDefault();	
 	$("#errorDisplay").fadeOut(3000, function(){
 		//allow the user to retrieve the message after fade out has completed
 		retrieve(); 
 	});
 }
 
+//quickly hide error display
+function removeErrorDisplay(){
+	event.preventDefault();
+	$("#errorDisplay").hide();
+}
 
+//remove the details display div after user closes out
+function removeDetailsDisplay(){
+	event.preventDefault();
+	
+	$(".detailsDisplay").fadeOut(3000, function(){
+		//allow the user to retrieve the errors after fade out has completed
+		retrieve(); 
+		//remove details display after hidden
+		$(".detailsDisplay").remove(); 
+	});
+
+}
 
 
