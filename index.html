@@ -16,23 +16,38 @@
 
 		<script src="lib/jquery/jquery-1.8.2.js"></script>
 		<script src="script/script.js"></script>
-	
+
 		<script>
 			$(document).ready(function(){
 				init();
 			});
+
+
 		</script>
+
 </head>
 
 <body>
 
 		<h1> Display Errors </h1>
-		<div id = "imageContainer">
 
+		<div id = "imageContainer">
+			
 			<!-- user should place this div inside the div that they wish the errors to display under-->
 			<div id = "errorDisplay"></div> 
 
 		</div>
+
+
+		<form name="userInput">
+				<p>Please enter a short message string if you wish to set the initial display to the user</p>
+				<p><input type="text" id="shortMessage" size="110px"></textarea></p>
+				<p>Please enter a string of errors to test the error display</p>
+				<p><textarea id="fullMessage"rows="5" cols="80"></textarea></p>
+				<p><input type="submit" value="Show Me" onclick="test(shortMessage.value, fullMessage.value); return false"></p><!--page is being reloaded-->
+			</form>
+
+
 
 
 </body>

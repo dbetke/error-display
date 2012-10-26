@@ -1,66 +1,87 @@
 
-var containerDiv; 	//stores parent div
-var finalShortMsg; 	//stores final single-line message for display
+var containerDiv;   //stores parent div
+var fullShortMsg; 	//stores full single-line message for display
+var initialMsg;		//stores the shortened single-line message for display
 var fullMsg; 		//stores final full message for display if user chooses to view
 
+var cssLink = "<link rel='stylesheet' type='text/css' href='lib/css/errorDisplay.css' />";
+var errorDisplayHtml = "<button id='details' class='errorDisplay_detailsButton'>See Details</button>" + 
+					   "<a href='' class='errorDisplay_xbutton'>&#10006;</a>" + 
+					   "<span class='errorDisplayInitialMessage'></span>";
+
 function init(){
-	//assigning temporary message strings (for testing only)
-	var longMsg = "This is a string of errors \n with a second line of errors \n and a third line of errors \n and a fourth \n and \n and \n and then \n and some more \n and even more \n and \n and \n and \n blah blah blah";  
-	var shortMsg = "This is a short message";
 	
 	//find the parent div to append the message dialog to
 	containerDiv = "#" + $("#errorDisplay").parent().attr("id");
 
 	//adds the error display message box on page load
-	addErrors(longMsg); 
+	//addErrors(longMsg); 
+}
+
+function test(userShortMsg, userFullMsg){
+
+ 	addErrors(userFullMsg, userShortMsg);	
 
 }
 
-
 function addErrors(msgString, shortMsgString){
+	//if there is no short message passed to the function, split the full message string and use the first line
+	if (shortMsgString == ""){
+		var splitMsg = msgString.split("\n"); 
+		var firstLine = splitMsg[0];
+	}
+
 	//replace the unrecognized new line characters with line breaks 
 	fullMsg =  msgString.replace(/\n\r?/g, '<br />'); 
-	
 
-	//split the full message and return the first line only to display
-	var firstLine = function(){
-		var splitMsg = msgString.split("\n");
-		finalShortMsg = splitMsg[0];
-		return splitMsg[0];
-		}
 
 	//if shortMsgString exists, use it for final message, else use msgString
-	finalShortMsg = (shortMsgString != null) ? shortMsgString : firstLine; 
- 
+	initialMsg = (shortMsgString != "") ? shortMsgString : firstLine;
+
 	//only create error message dialog if errors exist
 	if (msgString != null){ 
-		addDisplay(finalShortMsg);
+		if (initialMsg.length > 90){
+			fullShortMsg = initialMsg;
+			initialMsg = initialMsg.substring(0,90) + " ...";
+		}
+
+		addDisplay(initialMsg);		
 	}
 
 }
 
 
 function addDisplay(msg){
+
+	if ($("#errorDisplay").is(':empty')){ //prevent duplicated errors
+		//calculate to use for positioning relative to top of outer div
+		var h = $(containerDiv).height() - 40;
+
+
 		//add css to the html page
-		$("head").append("<link rel='stylesheet' type='text/css' href='lib/css/errorDisplay.css' />"); 
+		$("head").append(cssLink);  
 		
 		//add the error display box class with css to the error display div
-		$("#errorDisplay").addClass("errorDisplay_initial"); 
-		//calculate to use for positioning relative to top of outer div
-		var h = $(containerDiv).height() - 40; 
+		$("#errorDisplay").addClass("errorDisplay_initial");  
 	  
 		//set the error display box to the bottom of the outer div utilizing the top attribute
 	    $(".errorDisplay_initial").css("top", h); 
 
-		//append the show details button
-		$(".errorDisplay_initial").append("<button id='details' class='errorDisplay_detailsButton'>See Details</button>"); 
-
-		//append the x button
-		$(".errorDisplay_initial").append("<a href='' class='errorDisplay_xbutton'>&#10006;</a>");
+		//append necessary html to the error display 
+		$(".errorDisplay_initial").append(errorDisplayHtml); 
 
 		//add the single-line message to the screen
-		$(".errorDisplay_initial").append("<span class='errorDisplayInitialMessage'>").append(msg).append("</span>"); 
-		
+		$(".errorDisplayInitialMessage").append(msg);
+	}
+	else {
+
+		//if the error has changed, displays the new error (primarily for testing)
+		$(".errorDisplay_initial").empty();
+		$("#errorDisplay").show(); 
+		addDisplay(initialMsg); 
+
+	}
+
 		//set the show details button click event
 		$(".errorDisplay_detailsButton").bind("click", function(event) {
     			showDetails();
@@ -88,9 +109,9 @@ function showDetails(){
 }
 
 function retrieve(){
-	//remove the retrieval message
-
+	//remove the retrieval message 
 	$(".errorDisplay_initial").empty(); 
+
 	$(document).keydown(function(e) {
 		//detect alt + e or alt + E keypress
     	if (e.altKey && (e.which === 69 || e.which === 101)){  
@@ -99,7 +120,7 @@ function retrieve(){
 	        	//show the errorDisplay div
 	       		$("#errorDisplay").show(); 
 	       		//add the short error message back to the div
-	       		addDisplay(finalShortMsg); 
+	       		addDisplay(initialMsg); 
        		}	
     	}
     });
@@ -133,5 +154,7 @@ function removeDetailsDisplay(){
 	});
 
 }
+
+
 
 
