@@ -26,9 +26,6 @@ function init(){
 	//append necessary html to the body for displaying full error details to user
 	$("body").append("<div class = 'detailsDisplay'><span class='detailsDisplayMessage'></span><a href='' class='errorDisplay_xbutton'>&#10006;</a></div>");
 
-
-	//adds the error display message box on page load
-	//processErrors(longMsg); 
 }
 
 function processErrors(fullMsgString, shortMsgString){
@@ -76,7 +73,7 @@ function showErrors(msg){
 		//set the x button click event
 		$(".errorDisplay_xbutton").click(function(event) {
 			$(".errorDisplayMessage").empty().append(retrievalMsg);
-  			fadeErrorDisplay();
+  			fadeErrorDisplay(event);
 		});			 
 }
 
@@ -95,7 +92,7 @@ function showDetails(){
 	//set the x button click event
 		$(".errorDisplay_xbutton").click(function(event) {
 			$(".detailsDisplayMessage").empty().append(retrievalMsg);
-  			removeDetailsDisplay();
+  			removeDetailsDisplay(event);
 		});
 }
 
@@ -125,7 +122,7 @@ function retrieve(){
 }
 
 //fade the error display, while showing user retrieval instructions
-function fadeErrorDisplay(){
+function fadeErrorDisplay(event){
 	event.preventDefault();	
 
 	$("#errorDisplay").fadeOut(3000, function(){
@@ -136,14 +133,13 @@ function fadeErrorDisplay(){
 
 //quickly hide error display
 function removeErrorDisplay(){
-	event.preventDefault();
 
 	//hide the error display
 	$("#errorDisplay").hide();
 }
 
 //remove the details display div after user closes out
-function removeDetailsDisplay(){
+function removeDetailsDisplay(event){
 	event.preventDefault();
 	
 	$(".detailsDisplay").fadeOut(3000, function(){	
