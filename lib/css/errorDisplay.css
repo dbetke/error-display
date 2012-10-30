@@ -1,13 +1,14 @@
-.errorDisplay_initial {
+#errorDisplay {
 	font-family :  Helvetica, sans-serif;
 	background-color : #CCCCFF;
 	text-align : left; 
 	font-size : 12px;
 	line-height : 12px; 
-	height : 20px;
-	padding : 5px;
-	padding-right:10px;
-	position: relative;
+	height : 30px;
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	display:none;
 }
 
 .errorDisplay_xbutton { 
@@ -15,6 +16,7 @@
 	font-size : 15px;
 	float: right;
 	padding-right: 10px;
+
 } 
 
 .errorDisplay_detailsButton {
@@ -37,4 +39,5 @@
 	background-color: #CCCCFF;
 	overflow: auto;
 	padding-right: 10px;
+	display:none;
 }

@@ -1,86 +1,79 @@
 
 var containerDiv;   //stores parent div
-var fullShortMsg; 	//stores full single-line message for display
+var fullShortMsg; 	//stores full single-line message for display <todo: add ability to view the full short message - maybe on hover?>
 var initialMsg;		//stores the shortened single-line message for display
 var fullMsg; 		//stores final full message for display if user chooses to view
 
-var cssLink = "<link rel='stylesheet' type='text/css' href='lib/css/errorDisplay.css' />";
+//set message to instruct user how to retrieve error message after x button is clicked
+var retrievalMsg = "To retrieve errors at a later time, please click Alt+E";
+
+//set html that is applied to the error display div on init
 var errorDisplayHtml = "<button id='details' class='errorDisplay_detailsButton'>See Details</button>" + 
 					   "<a href='' class='errorDisplay_xbutton'>&#10006;</a>" + 
-					   "<span class='errorDisplayInitialMessage'></span>";
+					   "<span class='errorDisplayMessage'></span>";
 
 function init(){
 	
-	//find the parent div to append the message dialog to
+	//find the parent div of errorDisplay (needed for error display positioning)
 	containerDiv = "#" + $("#errorDisplay").parent().attr("id");
+	
+	//change the parent div's position attribute so the error display div will be at the bottom
+	$("#containerDiv").css("position", "relative");
+
+	//append necessary html to the error display 
+	$("#errorDisplay").append(errorDisplayHtml); 
+
+	//append necessary html to the body for displaying full error details to user
+	$("body").append("<div class = 'detailsDisplay'><span class='detailsDisplayMessage'></span><a href='' class='errorDisplay_xbutton'>&#10006;</a></div>");
+
 
 	//adds the error display message box on page load
-	//addErrors(longMsg); 
+	//processErrors(longMsg); 
 }
 
-function test(userShortMsg, userFullMsg){
+function testErrorDisplay(userFullMsg, userShortMsg){
 
- 	addErrors(userFullMsg, userShortMsg);	
+ 	processErrors(userFullMsg, userShortMsg);	
 
 }
 
-function addErrors(msgString, shortMsgString){
+function processErrors(fullMsgString, shortMsgString){
+	
 	//if there is no short message passed to the function, split the full message string and use the first line
 	if (shortMsgString == ""){
-		var splitMsg = msgString.split("\n"); 
+		var splitMsg = fullMsgString.split("\n"); 
 		var firstLine = splitMsg[0];
 	}
 
 	//replace the unrecognized new line characters with line breaks 
-	fullMsg =  msgString.replace(/\n\r?/g, '<br />'); 
-
+	fullMsg =  fullMsgString.replace(/\n\r?/g, '<br />'); 
 
 	//if shortMsgString exists, use it for final message, else use msgString
 	initialMsg = (shortMsgString != "") ? shortMsgString : firstLine;
 
 	//only create error message dialog if errors exist
-	if (msgString != null){ 
+	if (fullMsgString != null){ 
 		if (initialMsg.length > 90){
 			fullShortMsg = initialMsg;
 			initialMsg = initialMsg.substring(0,90) + " ...";
 		}
 
-		addDisplay(initialMsg);		
+		showErrors(initialMsg);		
 	}
 
 }
 
 
-function addDisplay(msg){
+function showErrors(msg){
+	
+		//empty the error display message (primarily for testing)
+		$(".errorDisplayMessage").empty();
 
-	if ($("#errorDisplay").is(':empty')){ //prevent duplicated errors
-		//calculate to use for positioning relative to top of outer div
-		var h = $(containerDiv).height() - 40;
+		//make the error display visible
+		$("#errorDisplay").show();
 
-
-		//add css to the html page
-		$("head").append(cssLink);  
-		
-		//add the error display box class with css to the error display div
-		$("#errorDisplay").addClass("errorDisplay_initial");  
-	  
-		//set the error display box to the bottom of the outer div utilizing the top attribute
-	    $(".errorDisplay_initial").css("top", h); 
-
-		//append necessary html to the error display 
-		$(".errorDisplay_initial").append(errorDisplayHtml); 
-
-		//add the single-line message to the screen
-		$(".errorDisplayInitialMessage").append(msg);
-	}
-	else {
-
-		//if the error has changed, displays the new error (primarily for testing)
-		$(".errorDisplay_initial").empty();
-		$("#errorDisplay").show(); 
-		addDisplay(initialMsg); 
-
-	}
+		//add the initial message to the screen
+		$(".errorDisplayMessage").append(msg);
 
 		//set the show details button click event
 		$(".errorDisplay_detailsButton").bind("click", function(event) {
@@ -89,7 +82,7 @@ function addDisplay(msg){
 
 		//set the x button click event
 		$(".errorDisplay_xbutton").click(function(event) {
-			$(".errorDisplay_initial").empty().append("To retrieve errors at a later time, please click Alt+E");
+			$(".errorDisplayMessage").empty().append(retrievalMsg);
   			fadeErrorDisplay();
 		});
 
@@ -97,30 +90,40 @@ function addDisplay(msg){
 }
 
 function showDetails(){
+
+	//hide the error display div
 	removeErrorDisplay();
-	$("body").append("<div class = 'detailsDisplay'></div>");
-	$(".detailsDisplay").append("<a href='' class='errorDisplay_xbutton'>&#10006;</a>");
-	$(".detailsDisplay").append(fullMsg);
+
+	//show the details display div with the full message
+	$(".detailsDisplay").show();
+	$(".detailsDisplayMessage").append(fullMsg);
+
 	//set the x button click event
 		$(".errorDisplay_xbutton").click(function(event) {
-			$(".detailsDisplay").empty().append("To retrieve errors at a later time, please click Alt+E");
+			$(".detailsDisplayMessage").empty().append(retrievalMsg);
   			removeDetailsDisplay();
 		});
 }
 
 function retrieve(){
+
 	//remove the retrieval message 
-	$(".errorDisplay_initial").empty(); 
+	$(".errorDisplayMessage").empty(); 
 
 	$(document).keydown(function(e) {
+
 		//detect alt + e or alt + E keypress
     	if (e.altKey && (e.which === 69 || e.which === 101)){  
         	e.preventDefault(); 
-        	if ($("#errorDisplay").is(':hidden')){ //prevent duplicated errors
+
+        	//verify error display is not already visible to prevent duplicated errors
+        	if ($("#errorDisplay").is(':hidden')){ 
+
 	        	//show the errorDisplay div
 	       		$("#errorDisplay").show(); 
+
 	       		//add the short error message back to the div
-	       		addDisplay(initialMsg); 
+	       		showErrors(initialMsg); 
        		}	
     	}
     });
@@ -130,6 +133,7 @@ function retrieve(){
 //fade the error display, while showing user retrieval instructions
 function fadeErrorDisplay(){
 	event.preventDefault();	
+
 	$("#errorDisplay").fadeOut(3000, function(){
 		//allow the user to retrieve the message after fade out has completed
 		retrieve(); 
@@ -139,6 +143,8 @@ function fadeErrorDisplay(){
 //quickly hide error display
 function removeErrorDisplay(){
 	event.preventDefault();
+
+	//hide the error display
 	$("#errorDisplay").hide();
 }
 
@@ -146,11 +152,14 @@ function removeErrorDisplay(){
 function removeDetailsDisplay(){
 	event.preventDefault();
 	
-	$(".detailsDisplay").fadeOut(3000, function(){
+	$(".detailsDisplay").fadeOut(3000, function(){	
+
+		//clear the details display message
+  		$(".detailsDisplayMessage").empty();
+
 		//allow the user to retrieve the errors after fade out has completed
 		retrieve(); 
-		//remove details display after hidden
-		$(".detailsDisplay").remove(); 
+		
 	});
 
 }
