@@ -31,14 +31,8 @@ function init(){
 	//processErrors(longMsg); 
 }
 
-function testErrorDisplay(userFullMsg, userShortMsg){
-
- 	processErrors(userFullMsg, userShortMsg);	
-
-}
-
 function processErrors(fullMsgString, shortMsgString){
-	
+
 	//if there is no short message passed to the function, split the full message string and use the first line
 	if (shortMsgString == ""){
 		var splitMsg = fullMsgString.split("\n"); 
@@ -63,7 +57,6 @@ function processErrors(fullMsgString, shortMsgString){
 
 }
 
-
 function showErrors(msg){
 	
 		//empty the error display message (primarily for testing)
@@ -84,15 +77,16 @@ function showErrors(msg){
 		$(".errorDisplay_xbutton").click(function(event) {
 			$(".errorDisplayMessage").empty().append(retrievalMsg);
   			fadeErrorDisplay();
-		});
-
-				 
+		});			 
 }
 
 function showDetails(){
 
 	//hide the error display div
 	removeErrorDisplay();
+
+	//clear any previous details display message
+	$(".detailsDisplayMessage").empty();
 
 	//show the details display div with the full message
 	$(".detailsDisplay").show();
@@ -154,14 +148,10 @@ function removeDetailsDisplay(){
 	
 	$(".detailsDisplay").fadeOut(3000, function(){	
 
-		//clear the details display message
-  		$(".detailsDisplayMessage").empty();
-
 		//allow the user to retrieve the errors after fade out has completed
 		retrieve(); 
 		
 	});
-
 }
 
 
