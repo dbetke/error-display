@@ -103,7 +103,8 @@ function showDetails(){
 			$(".detailsDisplayMessage").empty().append(retrievalMsg);
   			removeDetailsDisplay(event);
 		});
-}
+	
+}	
 
 function retrieve(){
 

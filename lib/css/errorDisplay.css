@@ -16,7 +16,7 @@
 }
 
 .errorDisplayMessage{
-	/**overflow-x: auto;*/
+	/**overflow-x: auto; */
 	overflow-x: hidden; /** change to have no overflow instead of a scrollbar */
 	overflow-y: hidden;
 	white-space: nowrap;
@@ -48,12 +48,10 @@
 
 .detailsDisplay{
 	position: fixed;
-	top: 50%;
-	left: 50%;
-	margin-top: -50px;
-	margin-left: -200px;
+	top: 25%;
+	left: 25%;
 	height: 100px;
-	width: 500px;
+	width: 700px;
 	padding: 5px;
 	text-align: left;
 	border: solid;
@@ -65,10 +63,10 @@
 
 .detailsDisplayMessage{
 	font-family:  Helvetica, sans-serif;
-	font-size: 12px;
+	font-size: .833em;
 	color: #32446B;
 	height: 95px;
-	width: 500px;
+	width: 700px;
 	overflow: auto;
 	position: fixed;
 	margin-top: 9px;
