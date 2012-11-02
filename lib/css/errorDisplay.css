@@ -1,19 +1,30 @@
 #errorDisplay {
-	font-family :  Helvetica, sans-serif;
+	font-family: Helvetica, sans-serif;
 	color: #32446B;
 	background-color: white;
-	/**background-color: #B8CBF2;*/
-	text-align : left; 
-	font-size : 12px;
-	line-height : 12px; 
-	height : 30px;
+	text-align: left; 
+	font-size: 12px;
+	line-height: 12px; 
+	height: 50px;
 	position: absolute;
 	bottom: 0px;
 	width: 99%;
-	display:none;
 	border: solid;
 	border-color: #A9BADE;
 	border-style: ridge;
+	display: none;
+}
+
+.errorDisplayMessage{
+	overflow-x: auto;
+	overflow-y: hidden;
+	white-space: nowrap;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 95%;
+	margin-top: 20px;
+	margin-left: 10px;
 }
 
 .errorDisplay_xbutton { 
@@ -48,13 +59,12 @@
 	border-color: #A9BADE;
 	border-style: ridge;
 	background-color: white;
-	/**background-color: #B8CBF2;*/
-	display:none;
+	display: none;
 }
 
 .detailsDisplayMessage{
-	font-family :  Helvetica, sans-serif;
-	font-size : 12px;
+	font-family:  Helvetica, sans-serif;
+	font-size: 12px;
 	color: #32446B;
 	height: 95px;
 	width: 500px;

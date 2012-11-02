@@ -8,8 +8,10 @@ var fullMsg; 		//stores final full message for display if user chooses to view
 var retrievalMsg = "To retrieve errors at a later time, please click Alt+E";
 
 //set html that is applied to the error display div on init
-var errorDisplayHtml = "<button id='details' class='errorDisplay_detailsButton'>See Details</button>" + 
+var errorDisplayHtml = "<span class='errorDisplayOptions'>" + 
+					   "<button id='details' class='errorDisplay_detailsButton'>See Details</button>" + 
 					   "<a href='' class='errorDisplay_xbutton'>&#10006;</a>" + 
+					   "</span>" + //end error display options span tag
 					   "<span class='errorDisplayMessage'></span>";
 
 function init(){
@@ -44,10 +46,13 @@ function processErrors(fullMsgString, shortMsgString){
 
 	//only create error message dialog if errors exist
 	if (fullMsgString != null){ 
+		/*
+		//shorten the message if longer than 90 characters
 		if (initialMsg.length > 90){
 			fullShortMsg = initialMsg;
 			initialMsg = initialMsg.substring(0,90) + " ...";
 		}
+		*/
 
 		showErrors(initialMsg);		
 	}
@@ -62,6 +67,9 @@ function showErrors(msg){
 		//make the error display visible
 		$("#errorDisplay").show();
 
+		//make the error display options visible
+		$(".errorDisplayOptions").show();
+
 		//add the initial message to the screen
 		$(".errorDisplayMessage").append(msg);
 
@@ -74,7 +82,8 @@ function showErrors(msg){
 		$(".errorDisplay_xbutton").click(function(event) {
 			$(".errorDisplayMessage").empty().append(retrievalMsg);
   			fadeErrorDisplay(event);
-		});			 
+		});			
+
 }
 
 function showDetails(){
@@ -124,7 +133,7 @@ function retrieve(){
 //fade the error display, while showing user retrieval instructions
 function fadeErrorDisplay(event){
 	event.preventDefault();	
-
+	$(".errorDisplayOptions").hide();
 	$("#errorDisplay").fadeOut(3000, function(){
 		//allow the user to retrieve the message after fade out has completed
 		retrieve(); 
