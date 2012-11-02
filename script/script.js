@@ -26,7 +26,7 @@ function init(){
 	$("#errorDisplay").append(errorDisplayHtml); 
 
 	//append necessary html to the body for displaying full error details to user
-	$("body").append("<div class = 'detailsDisplay'><span class='detailsDisplayMessage'></span><a href='' class='errorDisplay_xbutton'>&#10006;</a></div>");
+	$("body").append("<div class = 'detailsDisplay'><span class='errorDisplayOptions'><a href='' class='errorDisplay_xbutton'>&#10006;</a></span><span class='detailsDisplayMessage'></span></div>");
 
 }
 

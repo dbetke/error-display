@@ -5,9 +5,10 @@
 	text-align: left; 
 	font-size: 12px;
 	line-height: 12px; 
-	height: 40px; /** if allowing overflow, increase height */
+	height: 45px; /** if allowing overflow, increase height */
 	position: absolute;
 	bottom: 0px;
+	left: 0px;
 	width: 99%;
 	border: solid;
 	border-color: #A9BADE;
@@ -27,6 +28,12 @@
 	margin-top: 20px;
 	margin-left: 10px;
 }
+
+/*adding this makes the x position properly in the details div in IE only
+.errorDisplayOptions{
+        position: relative;
+}
+*/
 
 .errorDisplay_xbutton { 
 	text-decoration: none;
@@ -49,9 +56,8 @@
 .detailsDisplay{
 	position: fixed;
 	top: 25%;
-	left: 25%;
 	height: 100px;
-	width: 700px;
+	width: 75%;
 	padding: 5px;
 	text-align: left;
 	border: solid;
@@ -66,7 +72,7 @@
 	font-size: .833em;
 	color: #32446B;
 	height: 95px;
-	width: 700px;
+	width: inherit;
 	overflow: auto;
 	position: fixed;
 	margin-top: 9px;
