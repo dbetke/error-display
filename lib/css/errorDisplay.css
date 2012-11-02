@@ -5,7 +5,7 @@
 	text-align: left; 
 	font-size: 12px;
 	line-height: 12px; 
-	height: 50px;
+	height: 40px; /** if allowing overflow, increase height */
 	position: absolute;
 	bottom: 0px;
 	width: 99%;
@@ -16,7 +16,8 @@
 }
 
 .errorDisplayMessage{
-	overflow-x: auto;
+	/**overflow-x: auto;*/
+	overflow-x: hidden; /** change to have no overflow instead of a scrollbar */
 	overflow-y: hidden;
 	white-space: nowrap;
 	position: absolute;
