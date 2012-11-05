@@ -29,18 +29,11 @@
 	margin-left: 10px;
 }
 
-/*adding this makes the x position properly in the details div in IE only
-.errorDisplayOptions{
-        position: relative;
-}
-*/
-
 .errorDisplay_xbutton { 
 	text-decoration: none;
 	font-size: 15px;
 	margin-top: 2px;
 	position: absolute;
-	float: right;
 	right: 8px;
 	top: 0px;
 	color: #4D68A3;

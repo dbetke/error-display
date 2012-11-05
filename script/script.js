@@ -97,7 +97,7 @@ function showDetails(){
 	//set the x button click event
 		$(".errorDisplay_xbutton").click(function(event) {
 			$(".detailsDisplayMessage").empty().append(retrievalMsg);
-  			removeDetailsDisplay(event);
+  			fadeDetailsDisplay(event);
 		});
 	
 }	
@@ -145,11 +145,9 @@ function removeErrorDisplay(){
 }
 
 //remove the details display div after user closes out
-function removeDetailsDisplay(event){
+function fadeDetailsDisplay(event){
 	event.preventDefault();
-	
 	$(".detailsDisplay").fadeOut(3000, function(){	
-
 		//allow the user to retrieve the errors after fade out has completed
 		retrieve(); 
 		
