@@ -1,18 +1,22 @@
 
 var containerDiv;   //stores parent div
-var fullShortMsg; 	//stores full single-line message for display <todo: add ability to view the full short message - maybe on hover?>
-var initialMsg;		//stores the shortened single-line message for display
-var fullMsg; 		//stores final full message for display if user chooses to view
+var fullShortMsg;   //stores full single-line message for display <todo: add ability to view the full short message - maybe on hover?>
+var initialMsg;		  //stores the shortened single-line message for display
+var fullMsg; 		    //stores final full message for display if user chooses to view
 
 //set message to instruct user how to retrieve error message after x button is clicked
 var retrievalMsg = "To retrieve errors at a later time, please click Alt+E";
 
 //set html that is applied to the error display div on init
-var errorDisplayHtml = "<span class='errorDisplayOptions'>" + 
-					   "<button id='details' class='errorDisplay_detailsButton'>See Details</button>" + 
-					   "<a href='' class='errorDisplay_xbutton'>&#10006;</a>" + 
-					   "</span>" + //end error display options span tag
-					   "<span class='errorDisplayMessage'></span>";
+var errorDisplayHtml =  "<span class='errorDisplayOptions'>" + 
+					              "<button id='details' class='errorDisplay_detailsButton'>See Details</button>" + 
+					              "<a href='' class='errorDisplay_xbutton'>&#10006;</a>" + 
+					              "</span>" + //end error display options span tag
+					              "<span class='errorDisplayMessage'></span>";
+
+var detailDisplayHtml = "<div class = 'detailsDisplay'><span class='errorDisplayOptions'>" +
+                        "<a href='' class='errorDisplay_xbutton'>&#10006;</a></span>" +
+                        "<span class='detailsDisplayMessage'></span></div>"
 
 function init(){
 	
@@ -26,7 +30,7 @@ function init(){
 	$("#errorDisplay").append(errorDisplayHtml); 
 
 	//append necessary html to the body for displaying full error details to user
-	$("body").append("<div class = 'detailsDisplay'><span class='errorDisplayOptions'><a href='' class='errorDisplay_xbutton'>&#10006;</a></span><span class='detailsDisplayMessage'></span></div>");
+	$("body").append(detailDisplayHtml);
 
 }
 
@@ -46,14 +50,6 @@ function processErrors(fullMsgString, shortMsgString){
 
 	//only create error message dialog if errors exist
 	if (fullMsgString != null){ 
-		/*
-		//shorten the message if longer than 90 characters
-		if (initialMsg.length > 90){
-			fullShortMsg = initialMsg;
-			initialMsg = initialMsg.substring(0,90) + " ...";
-		}
-		*/
-
 		showErrors(initialMsg);		
 	}
 
