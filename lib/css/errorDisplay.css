@@ -67,6 +67,7 @@
 	color: #32446B;
 	height: 95px;
 	width: inherit;
+	width: expression(this.parentNode.currentStyle['width']);
 	overflow: auto;
 	position: fixed;
 	margin-top: 9px;
