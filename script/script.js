@@ -24,7 +24,10 @@ function init(){
 	containerDiv = "#" + $("#errorDisplay").parent().attr("id");
 	
 	//change the parent div's position attribute so the error display div will be at the bottom
-	$("#containerDiv").css("position", "relative");
+	$(containerDiv).css("position", "relative");
+	
+	//adjust the error display to fit properly in the container div (allowing for border)
+  $("#errorDisplay").width($(containerDiv).width()-6);
 
 	//append necessary html to the error display 
 	$("#errorDisplay").append(errorDisplayHtml); 
