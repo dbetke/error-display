@@ -9,7 +9,7 @@
 	position: absolute;
 	bottom: 0px;
 	left: 0px;
-	width: 99%;
+	width: inherit;
 	border: solid;
 	border-color: #A9BADE;
 	border-style: ridge;
