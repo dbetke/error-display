@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+		    #imageContainer{
+		        width: 400px;
+		        border: 1px solid #C0C0C0;
+		        height: 300px;
+		        position: relative;
+		        text-align: center;
+		        background-color: #73AEDE;
+		        margin-left: 50px;
+		    }
+
+		</style>
+
+		<link rel='stylesheet' type='text/css' href='lib/css/errorDisplay.css' />
+		<script src="lib/jquery/jquery-1.8.2.js"></script>
+		<script src="script/script.js"></script>
+
+		<script>
+			$(document).ready(function(){
+				init();
+			});
+
+
+		</script>
+
+</head>
+
+<body>
+
+		<h1> Display Errors </h1>
+
+		<div id = "imageContainer">
+			
+			<!-- user should place this div inside the div that they wish the errors to display under-->
+			<div id = "errorDisplay"></div> 
+
+		</div>
+
+
+		<form name="userInput">
+				<p>Please enter a short message string if you wish to set the initial display to the user</p>
+				<p><input type="text" id="shortMessage" size="110px"></textarea></p>
+				<p>Please enter a string of errors to test the error display</p>
+				<p><textarea id="fullMessage"rows="5" cols="80"></textarea></p>
+				<p><input type="submit" value="Show Me" onclick="processErrors(fullMessage.value, shortMessage.value); return false"></p><!--page is being reloaded-->
+			</form>
+
+
+
+
+</body>
+</html>
