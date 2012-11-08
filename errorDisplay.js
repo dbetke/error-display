@@ -36,6 +36,7 @@
                 var $this = $(this),
                     data = $this.data('errorDisplay'),
                     settings = $.extend({
+                        'fadeOutTime' : 3000
                         // key : value
                         // ...
                     }, options);
@@ -51,7 +52,7 @@
                         event.preventDefault();
                         $(detailDisplay).find(".errorDisplayFullMessageArea").text(retrievalMsg);
                         $(detailDisplay).find(".errorDisplayOptions").hide();
-                        $(detailDisplay).fadeOut(3000);
+                        $(detailDisplay).fadeOut(settings.fadeOutTime);
                     });         
 
                     $this.data('errorDisplay', {
@@ -64,7 +65,7 @@
                         event.preventDefault(); 
                         $this.find(".errorDisplayShortMessage").text(retrievalMsg);
                         $this.find(".errorDisplayOptions").hide();
-                        $this.find(".errorDisplay").fadeOut(3000);
+                        $this.find(".errorDisplay").fadeOut(settings.fadeOutTime);
                     });         
 
 

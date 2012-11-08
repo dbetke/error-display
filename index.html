@@ -21,7 +21,10 @@
 
 		<script>
 		  $(document).ready(function() {
-            $('#testContainer').errorDisplay();
+
+            $('#testContainer').errorDisplay({
+               // 'fadeOutTime' : 500
+            });
 
             $('#submitManual').click(function() {
               $('#testContainer').errorDisplay("displayError", fullMessage.value, shortMessage.value);
@@ -95,9 +98,15 @@
                 },
             ];
 
-            $('#submitRandom').click(function() {
+            $('#submitRandomError').click(function() {
                 var i = Math.floor(Math.random()*randomErrors.length);
-                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short);
+                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short, { 'color' : '#ff0000' } );
+                return false;
+            });
+
+            $('#submitRandomWarning').click(function() {
+                var i = Math.floor(Math.random()*randomErrors.length);
+                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short, { 'color' : '#e06a1b' } );
                 return false;
             });
 
@@ -117,7 +126,9 @@
 
 <table><tr>
 <td width="300" align="center">
-<input id="submitRandom" type="submit" value="Generate Random Error">
+<input id="submitRandomError" type="submit" value="Generate Random Error">
+<p>
+<input id="submitRandomWarning" type="submit" value="Generate Random Warning">
 </td>
 
 <td  align="center">
@@ -131,7 +142,7 @@
   <td><textarea id="fullMessage" rows="5" cols="80"></textarea></td>
 </tr>
 </table>
-<input id="submitManul" type="submit" value="Generate Manual Error">
+<input id="submitManual" type="submit" value="Generate Manual Error">
 </td>
 </tr></table>
 
