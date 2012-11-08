@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<style>
-		    #imageContainer{
+		    #testContainer{
 		        width: 400px;
 		        border: 1px solid #C0C0C0;
 		        height: 300px;
@@ -14,39 +14,127 @@
 
 		</style>
 
-		<link rel='stylesheet' type='text/css' href='lib/css/errorDisplay.css' />
 		<script src="lib/jquery/jquery-1.8.2.js"></script>
-		<script src="script/script.js"></script>
+
+		<link rel='stylesheet' type='text/css' href='errorDisplay.css' />
+		<script src="errorDisplay.js"></script>
 
 		<script>
-			$(document).ready(function(){
-				init();
-			});
+		  $(document).ready(function() {
+            $('#testContainer').errorDisplay();
 
+            $('#submitManual').click(function() {
+              $('#testContainer').errorDisplay("displayError", fullMessage.value, shortMessage.value);
+              return false;
+            });
 
+            var randomErrors = [
+                {
+                    short : "Illegal Operation",
+                    full  : "The program has performed an illegal operation and will be shut down"
+                },
+                {
+                    short : "Audio Error",
+                    full  : "Data or no disk loaded when trying to play an audio CD"
+                },
+                {
+                    short : "He's Dead Jim",
+                    full  : "Device is not responding"
+                },
+                {
+                    short : "Dial-Up",
+                    full  : "Dial-Up Networking could not negotiate a compatible set of protocols"
+                },
+                {
+                    short : "Disk Init Error",
+                    full  : "Disk initialization error"
+                },
+                {
+                    short : "Compression Problem",
+                    full  : "Drive C cannot be compressed"
+                },
+                {
+                    short : "Drive in Use",
+                    full  : "Drive X is in use by a local drive"
+                },
+                {
+                    short : "Schedule Access",
+                    full  : "Could not access schedule information"
+                },
+                {
+                    short : "Additional Data",
+                    full  : "Additional data is available"
+                },
+                {
+                    short : "Essential File",
+                    full  : "An Essential File Is Missing"
+                },
+                {
+                    short : "Deletion Failed",
+                    full  : "Error Deleting File"
+                },
+                {
+                    short : "Missing Object Handler",
+                    full  : "Problem Locating Object Handler"
+                },
+                {
+                    short : "User List Unavailable",
+                    full  : "You Cannot View The List of Users at This Time"
+                },
+                {
+                    short : "Error Renaming File",
+                    full  : "Error Renaming File. Cannot rename C:\filename"
+                },
+                {
+                    short : "Out of Memory",
+                    full  : "Out of Memory"
+                },
+                {
+                    short : "Invalid Filename",
+                    full  : "Error SU-0011"
+                },
+            ];
+
+            $('#submitRandom').click(function() {
+                var i = Math.floor(Math.random()*randomErrors.length);
+                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short);
+                return false;
+            });
+
+		  });
 		</script>
 
 </head>
 
 <body>
 
-		<h1> Display Errors </h1>
+		<h1> errorDisplay Test </h1>
 
-		<div id = "imageContainer">
-			
-			<!-- user should place this div inside the div that they wish the errors to display under-->
-			<div id = "errorDisplay"></div> 
-
+		<div id="testContainer">
 		</div>
 
 
-		<form name="userInput">
-				<p>Please enter a short message string if you wish to set the initial display to the user</p>
-				<p><input type="text" id="shortMessage" size="110px"></textarea></p>
-				<p>Please enter a string of errors to test the error display</p>
-				<p><textarea id="fullMessage"rows="5" cols="80"></textarea></p>
-				<p><input type="submit" value="Show Me" onclick="processErrors(fullMessage.value, shortMessage.value); return false"></p><!--page is being reloaded-->
-			</form>
+
+<table><tr>
+<td width="300" align="center">
+<input id="submitRandom" type="submit" value="Generate Random Error">
+</td>
+
+<td  align="center">
+<table>
+<tr>
+  <td>Short Message:</td>
+  <td><input type="text" id="shortMessage" size="80"></td>
+</tr>
+<tr>
+  <td>Full Message:</td>
+  <td><textarea id="fullMessage" rows="5" cols="80"></textarea></td>
+</tr>
+</table>
+<input id="submitManul" type="submit" value="Generate Manual Error">
+</td>
+</tr></table>
+
 
 
 
