@@ -23,7 +23,7 @@
 		  $(document).ready(function() {
 
             $('#testContainer').errorDisplay({
-               // 'fadeOutTime' : 500
+                'fadeOutTime' : 500
             });
 
             $('#submitManual').click(function() {
@@ -106,7 +106,7 @@
 
             $('#submitRandomWarning').click(function() {
                 var i = Math.floor(Math.random()*randomErrors.length);
-                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short, { 'color' : '#e06a1b' } );
+                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short, { 'color' : '#C7DB46' } );
                 return false;
             });
 
