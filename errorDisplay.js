@@ -37,13 +37,11 @@
                     data = $this.data('errorDisplay'),
                     settings = $.extend({
                         'fadeOutTime' : 3000
-                        // key : value
-                        // ...
                     }, options);
                 if ( ! data ) {
 
                     $this.append(errorDisplayHtml);
-                    $this.find('.errorDisplay').width($this.width()-6);
+                    $this.find('.errorDisplay').width($this.width()-6);  
 
                     var detailDisplay = $(detailDisplayHtml).appendTo($("body"));
                     var detailDisplayList = $(detailDisplayListHtml);
@@ -90,14 +88,17 @@
             });
         }, // init() method
 
-        displayError : function(fullMessage, shortMessage) {
+        displayError : function(fullMessage, shortMessage, options) {
             return this.each(function() {
                 var $this = $(this),
-                    data = $this.data('errorDisplay');
-                $this.find('.errorDisplayShortMessage').text(shortMessage);
+                    data = $this.data('errorDisplay'),
+                    settings = $.extend({
+                        'color' : '#46E01B'
+                    }, options);
+                $this.find('.errorDisplayShortMessage').text(shortMessage).css('color', settings.color);
                 $this.find(".errorDisplayOptions").show();
                 $this.find('.errorDisplay').show();
-                $(data.detailDisplayList).append($('<li>'+fullMessage+'</li>'));
+                $(data.detailDisplayList).append($('<li>'+fullMessage+'</li>').css('color', settings.color));
             });
         } // displayError() method
 
