@@ -37,6 +37,7 @@
                     settings = $.extend({
                         'fadeOutTime' : 2000
                     }, options);
+                    
                 if ( ! data ) {
 
                     $this.append(errorDisplayHtml);
@@ -45,11 +46,11 @@
                     var detailDisplay = $(detailDisplayHtml).appendTo($("body"));
                     var detailDisplayList = $(detailDisplayListHtml);
 
-                    $(detailDisplay).find(".errorDisplayXButton").click(function(event) {
+                    $(detailDisplay).find('.errorDisplayXButton').click(function(event) {
                         event.preventDefault();
-                        $(detailDisplay).find(".errorDisplayOptions").hide();   
+                        $(detailDisplay).find('.errorDisplayOptions').hide();   
                         $(detailDisplay).hide();
-                        $this.find(".errorDisplayRetriever").show();
+                        $this.find('.errorDisplayRetriever').show();
                     });         
 
                     $this.data('errorDisplay', {
@@ -58,21 +59,21 @@
                     });
 
 
-                    $this.find(".errorDisplayXButton").click(function(event) {
+                    $this.find('.errorDisplayXButton').click(function(event) {
                         event.preventDefault(); 
-                        $this.find(".errorDisplayOptions").hide();
-                        $this.find(".errorDisplay").slideUp();
-                        $this.find(".errorDisplayRetriever").show();
+                        $this.find('.errorDisplayOptions').hide();
+                        $this.find('.errorDisplay').slideUp();
+                        $this.find('.errorDisplayRetriever').show();
                     });         
 
 
-                    $this.find(".errorDisplayDetailsButton").click(function(event) {
+                    $this.find('.errorDisplayDetailsButton').click(function(event) {
                         event.preventDefault(); 
-                        $this.find(".errorDisplay").hide();
+                        $this.find('.errorDisplay').hide();
                         $(detailDisplay).find('.errorDisplayFullMessageArea').empty().append($(detailDisplayList));
-                        $(detailDisplay).find(".errorDisplayOptions").show();
+                        $(detailDisplay).find('.errorDisplayOptions').show();
                         $(detailDisplay).show();
-                        $this.find(".errorDisplayRetriever").hide();
+                        $this.find('.errorDisplayRetriever').hide();
                     });
 
                 }
@@ -90,9 +91,10 @@
                         'displayHideTime' : 1000
                     }, options);
                 
-                $this.find(".errorDisplayRetriever").hide();
-                if(settings.displayHideSetting == 'hide'){                
-                  $this.find(".errorDisplayOptions").hide();
+                $this.find('.errorDisplayRetriever').hide();
+                $this.find('.errorDisplayOptions').hide();
+                
+                if(settings.displayHideSetting == 'hide'){   
                   $this.find('.errorDisplayShortMessage').text(shortMessage).css('color', settings.color);                
                   $this.find('.errorDisplay').show();
                   $this.find('.errorDisplay').slideUp(settings.displayHideTime, function(){
@@ -100,19 +102,21 @@
                   });              
                   
                 }
+                
                 else{                   
                   $this.find('.errorDisplayShortMessage').text(shortMessage).css('color', settings.color);
-                  $this.find(".errorDisplayOptions").show();
+                  $this.find('.errorDisplayOptions').show();
                   $this.find('.errorDisplay').show();
                 }
+                
                 $(data.detailDisplayList).append($('<li>'+fullMessage+'</li>').css('color', settings.color));
                 
-                $this.find(".errorDisplayRetriever").hover(function(event) {
+                $this.find('.errorDisplayRetriever').hover(function(event) {
                     event.preventDefault();                 
-                    $this.find(".errorDisplayOptions").hide();
+                    $this.find('.errorDisplayOptions').hide();
                     $this.find('.errorDisplayShortMessage').text(shortMessage).css('color', settings.color);                 
                     $this.find('.errorDisplay').slideDown(function(){
-                      $this.find(".errorDisplayOptions").show();
+                      $this.find('.errorDisplayOptions').show();
                     });
                     $this.find('.errorDisplayRetriever').hide();
                 });
