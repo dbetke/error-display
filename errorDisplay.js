@@ -10,6 +10,7 @@
             +   '</span>'
             +   '<span class="errorDisplayShortMessage"></span>'
             + '</div>'
+            + '<span class="errorDisplayRetriever"></span>'
     );
 
     var detailDisplayHtml = (
@@ -28,15 +29,13 @@
             + '</ul>'
     );
 
-    var retrievalMsg = "To retrieve errors at a later time, please click Alt+E";
-
     var methods = {
         init : function(options) {
             return this.each(function() {
                 var $this = $(this),
                     data = $this.data('errorDisplay'),
                     settings = $.extend({
-                        'fadeOutTime' : 3000
+                        'fadeOutTime' : 2000
                     }, options);
                 if ( ! data ) {
 
@@ -48,9 +47,9 @@
 
                     $(detailDisplay).find(".errorDisplayXButton").click(function(event) {
                         event.preventDefault();
-                        $(detailDisplay).find(".errorDisplayFullMessageArea").text(retrievalMsg);
-                        $(detailDisplay).find(".errorDisplayOptions").hide();
-                        $(detailDisplay).fadeOut(settings.fadeOutTime);
+                        $(detailDisplay).find(".errorDisplayOptions").hide();   
+                        $(detailDisplay).hide();
+                        $this.find(".errorDisplayRetriever").show();
                     });         
 
                     $this.data('errorDisplay', {
@@ -61,9 +60,9 @@
 
                     $this.find(".errorDisplayXButton").click(function(event) {
                         event.preventDefault(); 
-                        $this.find(".errorDisplayShortMessage").text(retrievalMsg);
                         $this.find(".errorDisplayOptions").hide();
-                        $this.find(".errorDisplay").fadeOut(settings.fadeOutTime);
+                        $this.find(".errorDisplay").slideUp();
+                        $this.find(".errorDisplayRetriever").show();
                     });         
 
 
@@ -73,14 +72,7 @@
                         $(detailDisplay).find('.errorDisplayFullMessageArea').empty().append($(detailDisplayList));
                         $(detailDisplay).find(".errorDisplayOptions").show();
                         $(detailDisplay).show();
-                    });
-
-                    $(document).keydown(function(e) {
-                        if (e.altKey && (e.which === 69 || e.which === 101)){  
-                            e.preventDefault();
-                            $this.find(".errorDisplayOptions").show();
-                            $this.find('.errorDisplay').show();
-                        }
+                        $this.find(".errorDisplayRetriever").hide();
                     });
 
                 }
@@ -93,13 +85,39 @@
                 var $this = $(this),
                     data = $this.data('errorDisplay'),
                     settings = $.extend({
-                        'color' : '#46E01B'
+                        'color' : '#46E01B',
+                        'displayHideSetting' : 'hide',
+                        'displayHideTime' : 1000
                     }, options);
-                $this.find('.errorDisplayShortMessage').text(shortMessage).css('color', settings.color);
-                $this.find(".errorDisplayOptions").show();
-                $this.find('.errorDisplay').show();
+                
+                $this.find(".errorDisplayRetriever").hide();
+                if(settings.displayHideSetting == 'hide'){                
+                  $this.find(".errorDisplayOptions").hide();
+                  $this.find('.errorDisplayShortMessage').text(shortMessage).css('color', settings.color);                
+                  $this.find('.errorDisplay').show();
+                  $this.find('.errorDisplay').slideUp(settings.displayHideTime, function(){
+                    $this.find('.errorDisplayRetriever').show();
+                  });              
+                  
+                }
+                else{                   
+                  $this.find('.errorDisplayShortMessage').text(shortMessage).css('color', settings.color);
+                  $this.find(".errorDisplayOptions").show();
+                  $this.find('.errorDisplay').show();
+                }
                 $(data.detailDisplayList).append($('<li>'+fullMessage+'</li>').css('color', settings.color));
+                
+                $this.find(".errorDisplayRetriever").hover(function(event) {
+                    event.preventDefault();                 
+                    $this.find(".errorDisplayOptions").hide();
+                    $this.find('.errorDisplayShortMessage').text(shortMessage).css('color', settings.color);                 
+                    $this.find('.errorDisplay').slideDown(function(){
+                      $this.find(".errorDisplayOptions").show();
+                    });
+                    $this.find('.errorDisplayRetriever').hide();
+                });
             });
+
         } // displayError() method
 
 

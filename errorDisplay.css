@@ -17,6 +17,16 @@
 	display: none;
 }
 
+.errorDisplayRetriever{
+  height: 8px;
+  background-color: #ffffff;
+  border-top-right-radius: 10px;
+  width: 8px; 
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  display: none;
+}
 .errorDisplayShortMessage{
 	/**overflow-x: auto; */
 	overflow-x: hidden; /** change to have no overflow instead of a scrollbar */
@@ -28,6 +38,7 @@
 	width: 95%;
 	margin-top: 20px;
 	margin-left: 10px;
+	margin-bottom: 5px;
 }
 
 .errorDisplayXButton { 
@@ -35,7 +46,7 @@
 	font-size: 15px;
 	margin-top: 2px;
 	position: absolute;
-	right: 8px;
+	right: 5px;
 	top: 0px;
 	color: #4D68A3;
 
@@ -52,7 +63,6 @@
 	top: 25%;
 	height: 100px;
 	width: 75%;
-	padding: 5px;
 	text-align: left;
 	border: solid;
 	border-color: #A9BADE;
@@ -65,12 +75,12 @@
 	font-family:  Helvetica, sans-serif;
 	font-size: .833em;
 	color: #32446B;
-	height: 95px;
+	height: 80px;
 	width: inherit;
 	width: expression(this.parentNode.currentStyle['width']);
 	overflow: auto;
 	position: fixed;
-	margin-top: 9px;
+	margin-top: 15px;
 	white-space: nowrap;
 }
 
