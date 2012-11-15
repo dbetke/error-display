@@ -100,13 +100,13 @@
 
             $('#submitRandomError').click(function() {
                 var i = Math.floor(Math.random()*randomErrors.length);
-                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short, { 'fontColor' : '#ff0000' , "displayTime" : -1} );
+                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short, { 'fontColor' : '#000000' , 'displayTime' : -1, 'backgroundColor' : '#00ffff'} );
                 return false;
             });
 
             $('#submitRandomWarning').click(function() {
                 var i = Math.floor(Math.random()*randomErrors.length);
-                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short, { 'fontColor' : '#C7DB46' } );
+                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short);
                 return false;
             });
 

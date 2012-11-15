@@ -37,7 +37,7 @@
                     settings = $.extend({
                         'fontColor' : '#ff0000',
                         'backgroundColor' : '#ffffff',
-                        'displayTime' : 2000
+                        'displayTime' : 1000
                     }, options);
                     
                 if ( ! data ) {
@@ -96,15 +96,15 @@
                         'displayTime' : data.displayTime
                     }, options);
    
-   console.log("fontColor: " + settings.fontColor + " backgroundColor: " + settings.backgroundColor + " displayTime: " + settings.displayTime);
-                
-                $this.find('.errorDisplayRetriever').hide();
-                $this.find('.errorDisplayOptions').hide();
-                
-             
-                if(settings.displayTime >= 0){    
-                  $this.find('.errorDisplayShortMessage').text(shortMessage).css('color', settings.fontColor);                
+                  $this.find('.errorDisplayRetriever').hide();
+                  $this.find('.errorDisplayOptions').hide();
+
+                  $this.find('.errorDisplayShortMessage').css('color', settings.fontColor);   
+                  $this.find('.errorDisplay').css('background-color', settings.backgroundColor);
+                  $this.find('.errorDisplayOptions').css('background-color', settings.backgroundColor);           
+                  $this.find('.errorDisplayShortMessage').text(shortMessage);
                   $this.find('.errorDisplay').show();
+                  if(settings.displayTime >= 0){   
                   $this.find('.errorDisplay').slideUp(settings.displayTime, function(){
                     $this.find('.errorDisplayRetriever').show();
                   });              
@@ -112,7 +112,6 @@
               }
                 
                 else{                   
-                   $this.find('.errorDisplayShortMessage').text(shortMessage).css('color', settings.fontColor);
                    $this.find('.errorDisplayOptions').show();
                    $this.find('.errorDisplay').show();
                  }
