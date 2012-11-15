@@ -19,7 +19,8 @@
 
 .errorDisplayRetriever{
   height: 8px;
-  background-color: #ffffff;
+/*  background-color: #ffffff; */
+  background-color: #ff0000;
   border-top-right-radius: 10px;
   width: 8px; 
   position: absolute;
