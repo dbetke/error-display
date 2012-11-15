@@ -78,13 +78,18 @@
 	height: 80px;
 	width: inherit;
 	width: expression(this.parentNode.currentStyle['width']);
-	overflow: auto;
 	position: fixed;
-	margin-top: 15px;
+	margin-top: 12px;
+}
+
+.errorDisplayFullMessageList {
+	overflow: auto;
 	white-space: nowrap;
+	height: 75px;
 }
 
 .errorDisplayOptions{
-  background-color: white;
+  background-color: #FFFFFF;
+  display: inline;
 }
 
