@@ -46,7 +46,7 @@
 	font-size: 15px;
 	margin-top: 2px;
 	position: absolute;
-	right: 5px;
+	right: 3px;
 	top: 0px;
 	color: #4D68A3;
 
@@ -79,13 +79,14 @@
 	width: inherit;
 	width: expression(this.parentNode.currentStyle['width']);
 	position: fixed;
-	margin-top: 12px;
+	margin-top: 15px;
 }
 
 .errorDisplayFullMessageList {
 	overflow: auto;
 	white-space: nowrap;
-	height: 75px;
+	height: 80px;
+	margin-top: 5px;
 }
 
 .errorDisplayOptions{
