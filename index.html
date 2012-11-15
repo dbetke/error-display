@@ -23,7 +23,7 @@
 		  $(document).ready(function() {
 
             $('#testContainer').errorDisplay({
-                'fadeOutTime' : 1000
+              //  'displayTime' : 1000
             });
 
             $('#submitManual').click(function() {
@@ -100,13 +100,13 @@
 
             $('#submitRandomError').click(function() {
                 var i = Math.floor(Math.random()*randomErrors.length);
-                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short, { 'color' : '#ff0000' , "displayHideSetting" : "show"} );
+                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short, { 'fontColor' : '#ff0000' , "displayTime" : -1} );
                 return false;
             });
 
             $('#submitRandomWarning').click(function() {
                 var i = Math.floor(Math.random()*randomErrors.length);
-                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short, { 'color' : '#C7DB46' } );
+                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short, { 'fontColor' : '#C7DB46' } );
                 return false;
             });
 
