@@ -1,0 +1,17 @@
+<project name="error-display" default="build">
+
+  <target name="build">
+    <mkdir dir="build"/>
+    <exec executable="./css2js" failonerror="true">
+      <arg line="-o" />
+      <arg line="build/errorDisplay.css.js" />
+      <arg line="errorDisplay.css" />
+    </exec>
+    <concat destfile="build/errorDisplay.js" fixlastline="yes" eol="lf">
+      <filelist dir="." files="errorDisplay.js" />
+      <filelist dir="build" files="errorDisplay.css.js" />
+    </concat>
+    <delete file="build/errorDisplay.css.js" />
+  </target>
+
+</project>

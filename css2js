@@ -1,0 +1,71 @@
+#! /usr/bin/perl
+
+# Converts a css file to JavaScript.
+#
+# The resulting JavaScript file assumes that jQuery is available
+# in the global variable 'jQuery'
+#
+# mbp Fri Nov 16 18:05:56 2012
+
+while ( ($arg=shift) ne "" ) {
+    if ($arg eq "-o") {
+        $outfile = shift;
+        if (! $outfile) {
+            die "usage: css2js [-o OUTPUTFILE] INPUTFILE\n";
+        }
+    } else {
+        $infile = $arg;
+        last;
+    }
+}
+
+if (! -r $infile) {
+    die "can't read input file: $infile\n";
+}
+
+if (! $outfile) {
+    $outfile = "${infile}.js";
+}
+
+#
+# suck in the css file, removing leading and trailing whitespace from each line, and
+# concatenating all the lines together, with a single space between them
+#
+open(IN, "<$infile");
+@lines = ();
+while (<IN>) {
+      s/^\s*//;
+      s/\s*$//;
+      push(@lines, $_);
+}
+close(IN);
+$content = join(" ", @lines);
+
+#
+# remove /* comments */
+#
+while ( ($beg=index($content, "/*")) >= 0 ) {
+  if (($end=index($content, "*/")) >= 0) {
+      substr($content, $beg, $end-$beg+2) = "";
+  } else {
+      last;
+  }
+} 
+
+#
+# escape any single-quotes
+#
+$content =~ s/'/\\'/g;
+
+#
+# collapse whitespace
+#
+$content =~ s/\s+/ /g;
+
+#
+# output the final javascript
+#
+open(OUT, ">$outfile");
+print OUT "jQuery('head').append(jQuery('<style type=\"text/css\">$content</style>'));\n";
+close(OUT);
+printf("wrote $outfile\n");
