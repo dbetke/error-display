@@ -69,18 +69,20 @@
                     $this.find('.errorDisplayXButton').click(function(event) {
                         event.preventDefault(); 
                         $this.find('.errorDisplayOptions').hide();
-                        $this.find('.errorDisplay').slideUp();
-                        $this.find('.errorDisplayRetriever').show();
+                        $this.find('.errorDisplay').slideUp(settings.displayTime, function(){
+                            $this.find('.errorDisplayRetriever').show();
+                        });
                     });         
 
 
                     $this.find('.errorDisplayDetailsButton').click(function(event) {
                         event.preventDefault(); 
-                        $this.find('.errorDisplay').hide();
+                        $this.find('.errorDisplay').off(); //stops mouseleaveevent when details button is clicked
+                        $this.find('.errorDisplay').hide();                 
+                        $this.find('.errorDisplayRetriever').hide();
                         $(detailDisplay).find('.errorDisplayFullMessageArea').empty().append($(detailDisplayList));
                         $(detailDisplay).find('.errorDisplayOptions').show();
-                        $(detailDisplay).show();
-                        $this.find('.errorDisplayRetriever').hide();
+                        $(detailDisplay).show();                     
                     });
 
                 }
@@ -110,11 +112,10 @@
                if(settings.displayTime != -1){   
                   $this.find('.errorDisplay').slideUp(settings.displayTime, function(){
                       $this.find('.errorDisplayRetriever').show();
-                  });              
-                  
+                  });                              
               }
                 
-                else{                   
+               else{                   
                    $this.find('.errorDisplayOptions').show();
                    $this.find('.errorDisplay').show();
                  }
@@ -124,10 +125,17 @@
                 $this.find('.errorDisplayRetriever').hover(function(event) {
                     event.preventDefault();                 
                     $this.find('.errorDisplayOptions').hide();
-                    $this.find('.errorDisplayShortMessage').text(shortMessage).css('color', settings.fontColor);                 
+                    $this.find('.errorDisplayShortMessage').text(shortMessage).css('color', settings.fontColor);                        
                     $this.find('.errorDisplay').slideDown(function(){
                       $this.find('.errorDisplayOptions').show();
-                    });
+                      $this.find('.errorDisplay').mouseleave(function(event){
+                        event.preventDefault(); 
+                        $this.find('.errorDisplayOptions').hide();
+                        $this.find('.errorDisplay').slideUp(settings.displayTime, function(){
+                            $this.find('.errorDisplayRetriever').show();
+                        });                     
+                      });     
+                    });                   
                     $this.find('.errorDisplayRetriever').hide();
                 });
             });
