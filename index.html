@@ -24,6 +24,7 @@
 
             $('#testContainer').errorDisplay({
               //  'displayTime' : 1000
+              //'indicatorColor' : '#00ff00'
             });
 
             $('#submitManual').click(function() {
@@ -100,13 +101,13 @@
 
             $('#submitRandomError').click(function() {
                 var i = Math.floor(Math.random()*randomErrors.length);
-                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short, { 'fontColor' : '#000000' , 'displayTime' : -1, 'backgroundColor' : '#00ffff'} );
+                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short, {'indicatorColor' : '#000000', 'fontColor' : '#000000', 'displayTime' : '-1'}); //{ 'fontColor' : '#000000' , 'displayTime' : -1, 'backgroundColor' : '#00ffff', 'indicatorColor' : '#000000' } );
                 return false;
             });
 
             $('#submitRandomWarning').click(function() {
                 var i = Math.floor(Math.random()*randomErrors.length);
-                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short);
+                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short, {'indicatorColor' : '#00ff00'});
                 return false;
             });
 
