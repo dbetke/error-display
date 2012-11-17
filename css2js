@@ -1,9 +1,26 @@
 #! /usr/bin/perl
 
-# Converts a css file to JavaScript.
+# This script converts a css file into a JavaScript file that can be
+# loaded in an HTML page instead of the css file; the JavaScript file
+# uses jQuery to inject a '<style>' tag into the page <head>.
 #
-# The resulting JavaScript file assumes that jQuery is available
-# in the global variable 'jQuery'
+# The generated JavaScript file requires jQuery; it assumes that
+# jQuery has been loaded before it, and that jQuery is available in
+# the global variable 'jQuery'.
+#
+# The main idea here is that if you have a JavaScript file that needs
+# to define some css rules, you can maintain the css rules in a
+# regular css file in the development copy of your project, but use
+# this script to convert the css file to JavaScript for inclusion in a
+# "production" version of your JavaScript file, so that users of your
+# JavaScript file don't have to also include a separate css file.
+#
+# Usage:
+#
+#     css2js [-o OUTPUTFILE.js] INPUTFILE.css
+#
+# The output file name defaults to INPUTFILE.css.js if the -o option
+# is not specified.
 #
 # mbp Fri Nov 16 18:05:56 2012
 
@@ -34,9 +51,10 @@ if (! $outfile) {
 open(IN, "<$infile");
 @lines = ();
 while (<IN>) {
-      s/^\s*//;
-      s/\s*$//;
-      push(@lines, $_);
+    chomp;
+    s/^\s*//;
+    s/\s*$//;
+    push(@lines, $_);
 }
 close(IN);
 $content = join(" ", @lines);
