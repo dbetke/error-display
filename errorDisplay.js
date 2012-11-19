@@ -118,6 +118,7 @@
                else{                   
                    $this.find('.errorDisplayOptions').show();
                    $this.find('.errorDisplay').show();
+                   $this.find('.errorDisplay').off();
                  }
                 
                 $(data.detailDisplayList).append($('<li>'+fullMessage+'</li>').css('color', settings.fontColor));
