@@ -1,0 +1,89 @@
+#! /usr/bin/perl
+
+# This script converts a css file into a JavaScript file that can be
+# loaded in an HTML page instead of the css file; the JavaScript file
+# uses jQuery to inject a '<style>' tag into the page <head>.
+#
+# The generated JavaScript file requires jQuery; it assumes that
+# jQuery has been loaded before it, and that jQuery is available in
+# the global variable 'jQuery'.
+#
+# The main idea here is that if you have a JavaScript file that needs
+# to define some css rules, you can maintain the css rules in a
+# regular css file in the development copy of your project, but use
+# this script to convert the css file to JavaScript for inclusion in a
+# "production" version of your JavaScript file, so that users of your
+# JavaScript file don't have to also include a separate css file.
+#
+# Usage:
+#
+#     css2js [-o OUTPUTFILE.js] INPUTFILE.css
+#
+# The output file name defaults to INPUTFILE.css.js if the -o option
+# is not specified.
+#
+# mbp Fri Nov 16 18:05:56 2012
+
+while ( ($arg=shift) ne "" ) {
+    if ($arg eq "-o") {
+        $outfile = shift;
+        if (! $outfile) {
+            die "usage: css2js [-o OUTPUTFILE] INPUTFILE\n";
+        }
+    } else {
+        $infile = $arg;
+        last;
+    }
+}
+
+if (! -r $infile) {
+    die "can't read input file: $infile\n";
+}
+
+if (! $outfile) {
+    $outfile = "${infile}.js";
+}
+
+#
+# suck in the css file, removing leading and trailing whitespace from each line, and
+# concatenating all the lines together, with a single space between them
+#
+open(IN, "<$infile");
+@lines = ();
+while (<IN>) {
+    chomp;
+    s/^\s*//;
+    s/\s*$//;
+    push(@lines, $_);
+}
+close(IN);
+$content = join(" ", @lines);
+
+#
+# remove /* comments */
+#
+while ( ($beg=index($content, "/*")) >= 0 ) {
+  if (($end=index($content, "*/")) >= 0) {
+      substr($content, $beg, $end-$beg+2) = "";
+  } else {
+      last;
+  }
+} 
+
+#
+# escape any single-quotes
+#
+$content =~ s/'/\\'/g;
+
+#
+# collapse whitespace
+#
+$content =~ s/\s+/ /g;
+
+#
+# output the final javascript
+#
+open(OUT, ">$outfile");
+print OUT "jQuery('head').append(jQuery('<style type=\"text/css\">$content</style>'));\n";
+close(OUT);
+printf("wrote $outfile\n");
