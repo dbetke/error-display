@@ -35,10 +35,11 @@
                 var $this = $(this),
                     data = $this.data('errorDisplay'),
                     settings = $.extend({
-                        'fontColor' : '#ff0000',
-                        'backgroundColor' : '#ffffff',
+                        'displayFontColor' : '#ff0000',
+                        'displayBackgroundColor' : '#ffffff',
                         'displayTime' : 1000,
-                        'indicatorColor' : '#ff0000'
+                        'displayIndicatorColor' : '#ff0000',
+                        'displayLocation' : 'bottom'
                     }, options);
                 
                 if ( ! data ) {
@@ -59,10 +60,11 @@
                     $this.data('errorDisplay', {
                         'detailDisplay' : detailDisplay,
                         'detailDisplayList' : detailDisplayList,
-                        'fontColor' : settings.fontColor,
-                        'backgroundColor' : settings.backgroundColor,
+                        'displayFontColor' : settings.displayFontColor,
+                        'displayBackgroundColor' : settings.displayBackgroundColor,
                         'displayTime' : settings.displayTime,
-                        'indicatorColor' : settings.indicatorColor
+                        'displayIndicatorColor' : settings.displayIndicatorColor,
+                        'displayLocation' : settings.displayLocation
                     });
                     
                     
@@ -95,19 +97,22 @@
                 var $this = $(this),
                     data = $this.data('errorDisplay'),
                     settings = $.extend({
-                        'fontColor' : data.fontColor,
-                        'backgroundColor' : data.backgroundColor,
+                        'displayFontColor' : data.displayFontColor,
+                        'displayBackgroundColor' : data.displayBackgroundColor,
                         'displayTime' : data.displayTime,
-                        'indicatorColor' : data.indicatorColor
+                        'displayIndicatorColor' : data.displayIndicatorColor,
+                        'displayLocation' : data.displayLocation
                     }, options);
+                
+                
                 $this.find('.errorDisplayRetriever').hide();
                 $this.find('.errorDisplayOptions').hide();
-                $this.find('.errorDisplayShortMessage').css('color', settings.fontColor);   
-                $this.find('.errorDisplay').css('background-color', settings.backgroundColor);
-                  $this.find('.errorDisplayOptions').css('background-color', settings.backgroundColor);           
-                  $this.find('.errorDisplayShortMessage').text(shortMessage);
-                  $this.find('.errorDisplay').show();
-                  $this.find('.errorDisplayRetriever').css('background-color', settings.indicatorColor);
+                $this.find('.errorDisplayShortMessage').css('color', settings.displayFontColor);   
+                $this.find('.errorDisplay').css('background-color', settings.displayBackgroundColor);
+                $this.find('.errorDisplayOptions').css('background-color', settings.backgroundColor);           
+                $this.find('.errorDisplayShortMessage').text(shortMessage);
+                $this.find('.errorDisplay').show();
+                $this.find('.errorDisplayRetriever').css('background-color', settings.displayIndicatorColor);
                   
                if(settings.displayTime != -1){   
                   $this.find('.errorDisplay').slideUp(settings.displayTime, function(){
@@ -121,12 +126,12 @@
                    $this.find('.errorDisplay').off();
                  }
                 
-                $(data.detailDisplayList).append($('<li>'+fullMessage+'</li>').css('color', settings.fontColor));
+                $(data.detailDisplayList).append($('<li>'+fullMessage+'</li>').css('color', settings.displayFontColor));
                 
                 $this.find('.errorDisplayRetriever').hover(function(event) {
                     event.preventDefault();                 
                     $this.find('.errorDisplayOptions').hide();
-                    $this.find('.errorDisplayShortMessage').text(shortMessage).css('color', settings.fontColor);                        
+                    $this.find('.errorDisplayShortMessage').text(shortMessage).css('color', settings.displayFontColor);                        
                     $this.find('.errorDisplay').slideDown(function(){
                       $this.find('.errorDisplayOptions').show();
                       $this.find('.errorDisplay').mouseleave(function(event){
