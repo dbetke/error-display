@@ -5,9 +5,7 @@
 	text-align: left; 
 	font-size: 12px;
 	line-height: 12px; 
-	height: 45px; /** if allowing overflow, increase height */
-	position: absolute;
-	bottom: 0px;
+	height: 45px; 
 	left: 0px;
 	width: inherit;
 	width: expression(this.parentNode.currentStyle['width']);
@@ -17,19 +15,35 @@
 	display: none;
 }
 
+.errorDisplayTop{
+  position: relative;
+}
+
+.errorDisplayBottom{
+  position: absolute;
+  bottom: 0px;
+}
+
 .errorDisplayRetriever{
   height: 8px;
   background-color: #ff0000;
-  border-top-right-radius: 10px;
   width: 8px; 
   position: absolute;
-  bottom: 0px;
   left: 0px;
   display: none;
 }
+
+.errorDisplayRetrieverTop{
+  border-bottom-right-radius: 10px;
+}
+
+.errorDisplayRetrieverBottom{
+  bottom: 0px;
+  border-top-right-radius: 10px;;
+}
+
 .errorDisplayShortMessage{
-	/**overflow-x: auto; */
-	overflow-x: hidden; /** change to have no overflow instead of a scrollbar */
+	overflow-x: hidden; 
 	overflow-y: hidden;
 	white-space: nowrap;
 	position: absolute;

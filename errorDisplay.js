@@ -66,7 +66,6 @@
                         'displayLocation' : settings.displayLocation
                     });
                     
-                    
                     $this.find('.errorDisplayXButton').click(function(event) {
                         event.preventDefault(); 
                         $this.find('.errorDisplayOptions').hide();
@@ -100,13 +99,23 @@
                         'displayTime' : data.displayTime,
                         'displayIndicatorColor' : data.displayIndicatorColor,
                         'displayLocation' : data.displayLocation
-                    }, options);
+                    }, options);           
                 
+                if(settings.displayLocation == 'top'){
+                  $this.find('.errorDisplay').removeClass('errorDisplayBottom').addClass('errorDisplayTop');
+                  $this.find('.errorDisplayRetriever').removeClass('errorDisplayRetrieverBottom').addClass('errorDisplayRetrieverTop');
+                }
+                
+                else{ 
+                  $this.find('.errorDisplay').removeClass('errorDisplayTop').addClass('errorDisplayBottom');
+                  $this.find('.errorDisplayRetriever').removeClass('errorDisplayRetrieverTop').addClass('errorDisplayRetrieverBottom');      
+                }
                 
                 $this.find('.errorDisplayRetriever').hide().css('background-color', settings.displayIndicatorColor);
                 $this.find('.errorDisplayOptions').hide().css('background-color', settings.displayBackgroundColor);
                 $this.find('.errorDisplayShortMessage').css('color', settings.displayFontColor).text(shortMessage);   
                 $this.find('.errorDisplay').css('background-color', settings.displayBackgroundColor).show();  
+                
                   
                if(settings.displayTime != -1){   
                   $this.find('.errorDisplay').slideUp(settings.displayTime, function(){
