@@ -52,8 +52,7 @@
                     
                     $(detailDisplay).find('.errorDisplayXButton').click(function(event) {
                         event.preventDefault();
-                        $(detailDisplay).find('.errorDisplayOptions').hide();   
-                        $(detailDisplay).hide();
+                        $(detailDisplay).hide().find('.errorDisplayOptions').hide();   
                         $this.find('.errorDisplayRetriever').show();
                     });         
                     
@@ -79,8 +78,7 @@
                     
                     $this.find('.errorDisplayDetailsButton').click(function(event) {
                         event.preventDefault(); 
-                        $this.find('.errorDisplay').off(); //stops mouseleaveevent when details button is clicked
-                        $this.find('.errorDisplay').hide();                 
+                        $this.find('.errorDisplay').hide().off(); //stops mouseleaveevent when details button is clicked              
                         $this.find('.errorDisplayRetriever').hide();
                         $(detailDisplay).find('.errorDisplayFullMessageArea').empty().append($(detailDisplayList));
                         $(detailDisplay).find('.errorDisplayOptions').show();
@@ -105,14 +103,10 @@
                     }, options);
                 
                 
-                $this.find('.errorDisplayRetriever').hide();
-                $this.find('.errorDisplayOptions').hide();
-                $this.find('.errorDisplayShortMessage').css('color', settings.displayFontColor);   
-                $this.find('.errorDisplay').css('background-color', settings.displayBackgroundColor);
-                $this.find('.errorDisplayOptions').css('background-color', settings.backgroundColor);           
-                $this.find('.errorDisplayShortMessage').text(shortMessage);
-                $this.find('.errorDisplay').show();
-                $this.find('.errorDisplayRetriever').css('background-color', settings.displayIndicatorColor);
+                $this.find('.errorDisplayRetriever').hide().css('background-color', settings.displayIndicatorColor);
+                $this.find('.errorDisplayOptions').hide().css('background-color', settings.displayBackgroundColor);
+                $this.find('.errorDisplayShortMessage').css('color', settings.displayFontColor).text(shortMessage);   
+                $this.find('.errorDisplay').css('background-color', settings.displayBackgroundColor).show();  
                   
                if(settings.displayTime != -1){   
                   $this.find('.errorDisplay').slideUp(settings.displayTime, function(){
@@ -122,8 +116,7 @@
                 
                else{                   
                    $this.find('.errorDisplayOptions').show();
-                   $this.find('.errorDisplay').show();
-                   $this.find('.errorDisplay').off();
+                   $this.find('.errorDisplay').show().off();
                  }
                 
                 $(data.detailDisplayList).append($('<li>'+fullMessage+'</li>').css('color', settings.displayFontColor));
@@ -131,7 +124,8 @@
                 $this.find('.errorDisplayRetriever').hover(function(event) {
                     event.preventDefault();                 
                     $this.find('.errorDisplayOptions').hide();
-                    $this.find('.errorDisplayShortMessage').text(shortMessage).css('color', settings.displayFontColor);                        
+                    $this.find('.errorDisplayShortMessage').text(shortMessage).css('color', settings.displayFontColor);   
+                                         
                     $this.find('.errorDisplay').slideDown(function(){
                       $this.find('.errorDisplayOptions').show();
                       $this.find('.errorDisplay').mouseleave(function(event){
@@ -141,7 +135,8 @@
                             $this.find('.errorDisplayRetriever').show();
                         });                     
                       });     
-                    });                   
+                    });    
+                                   
                     $this.find('.errorDisplayRetriever').hide();
                 });
             });
