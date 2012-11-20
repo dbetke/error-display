@@ -53,7 +53,7 @@
                         event.preventDefault();
                         $(detailDisplay).find('.errorDisplayOptions').hide();   
                         $(detailDisplay).hide();
-                        $this.find('.errorDisplayRetriever').css('background-color', settings.indicatorColor).show();
+                        $this.find('.errorDisplayRetriever').show();
                     });         
                     
                     $this.data('errorDisplay', {
