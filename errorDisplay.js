@@ -101,6 +101,8 @@
                         'displayLocation' : data.displayLocation
                     }, options);           
                 
+                var errorDisplayShortMessage = (!shortMessage) ? fullMessage : shortMessage;  //use first line of full message if short message does not exist
+                
                 if(settings.displayLocation == 'top'){
                   $this.find('.errorDisplay').removeClass('errorDisplayBottom').addClass('errorDisplayTop');
                   $this.find('.errorDisplayRetriever').removeClass('errorDisplayRetrieverBottom').addClass('errorDisplayRetrieverTop');
@@ -113,7 +115,7 @@
                 
                 $this.find('.errorDisplayRetriever').hide().css('background-color', settings.displayIndicatorColor);
                 $this.find('.errorDisplayOptions').hide().css('background-color', settings.displayBackgroundColor);
-                $this.find('.errorDisplayShortMessage').css('color', settings.displayFontColor).text(shortMessage);   
+                $this.find('.errorDisplayShortMessage').css('color', settings.displayFontColor).html(errorDisplayShortMessage);   
                 $this.find('.errorDisplay').css('background-color', settings.displayBackgroundColor).show();  
                 
                   
@@ -133,7 +135,7 @@
                 $this.find('.errorDisplayRetriever').hover(function(event) {
                     event.preventDefault();                 
                     $this.find('.errorDisplayOptions').hide();
-                    $this.find('.errorDisplayShortMessage').text(shortMessage).css('color', settings.displayFontColor);   
+                    $this.find('.errorDisplayShortMessage').show();  
                                          
                     $this.find('.errorDisplay').slideDown(function(){
                       $this.find('.errorDisplayOptions').show();
