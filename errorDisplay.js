@@ -9,6 +9,7 @@
             +     '<a href="" class="errorDisplayXButton">&#10006;</a>'
             +   '</span>'
             +   '<span class="errorDisplayShortMessage"></span>'
+            +   '<span class="errorDisplayOverflow">...</span>'
             + '</div>'
             + '<span class="errorDisplayRetriever"></span>'
     );
@@ -74,8 +75,7 @@
                             $this.find('.errorDisplayRetriever').show();
                         });
                     });         
-                    
-                    
+                                     
                     $this.find('.errorDisplayDetailsButton').click(function(event) {
                         event.preventDefault(); 
                         $this.find('.errorDisplay').hide();           
