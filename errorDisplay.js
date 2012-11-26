@@ -49,6 +49,7 @@
                     
                     var detailDisplay = $(detailDisplayHtml).appendTo($("body"));
                     var detailDisplayList = $(detailDisplayListHtml);
+                    var errorDisplayFlag = 0;  //set error display flag to off
                     
                     $(detailDisplay).find('.errorDisplayXButton').click(function(event) {
                         event.preventDefault();
@@ -77,13 +78,35 @@
                     
                     $this.find('.errorDisplayDetailsButton').click(function(event) {
                         event.preventDefault(); 
-                        $this.find('.errorDisplay').hide().off(); //stops mouseleaveevent when details button is clicked              
+                        $this.find('.errorDisplay').hide();           
                         $this.find('.errorDisplayRetriever').hide();
                         $(detailDisplay).find('.errorDisplayFullMessageArea').empty().append($(detailDisplayList));
                         $(detailDisplay).find('.errorDisplayOptions').show();
                         $(detailDisplay).show();                     
                     });
                     
+                    $this.find('.errorDisplayRetriever').hover(function(event) {
+                        event.preventDefault();
+                        errorDisplayFlag = 1;  //turn on error display flag
+                          $this.find('.errorDisplayRetriever').hide();
+                          $this.find('.errorDisplay').slideDown(function(){
+                            $this.find('.errorDisplay').show();
+                            $this.find('.errorDisplayOptions').show();
+                          });  
+   
+                    });  
+                    
+                    $this.find('.errorDisplay').mouseleave(function(event){
+                      if(errorDisplayFlag){ //test for error display flag
+                        $this.find('.errorDisplayOptions').hide();
+                        $this.find('.errorDisplay').slideUp(settings.displayTime, function(){
+                          if( $(detailDisplay).css("display") == 'none' ){
+                            $this.find('.errorDisplayRetriever').show(); //only show retriever if not viewing display details
+                          }
+                        });
+                        errorDisplayFlag = 0; //turn off error display flag 
+                      }                    
+                    });      
                 }
                 return this;
             });
@@ -101,7 +124,7 @@
                         'displayLocation' : data.displayLocation
                     }, options);           
                 
-                var errorDisplayShortMessage = (!shortMessage) ? fullMessage : shortMessage;  //use first line of full message if short message does not exist
+                var errorDisplayShortMessage = (!shortMessage) ? fullMessage : shortMessage;  //use first line of full message if short message does not 
                 
                 if(settings.displayLocation == 'top'){
                   $this.find('.errorDisplay').removeClass('errorDisplayBottom').addClass('errorDisplayTop');
@@ -127,29 +150,10 @@
                 
                else{                   
                    $this.find('.errorDisplayOptions').show();
-                   $this.find('.errorDisplay').show().off();
+                   $this.find('.errorDisplay').show();
                  }
                 
                 $(data.detailDisplayList).append($('<li>'+fullMessage+'</li>').css('color', settings.displayFontColor));
-                
-                $this.find('.errorDisplayRetriever').hover(function(event) {
-                    event.preventDefault();                 
-                    $this.find('.errorDisplayOptions').hide();
-                    $this.find('.errorDisplayShortMessage').show();  
-                                         
-                    $this.find('.errorDisplay').slideDown(function(){
-                      $this.find('.errorDisplayOptions').show();
-                      $this.find('.errorDisplay').mouseleave(function(event){
-                        event.preventDefault(); 
-                        $this.find('.errorDisplayOptions').hide();
-                        $this.find('.errorDisplay').slideUp(settings.displayTime, function(){
-                            $this.find('.errorDisplayRetriever').show();
-                        });                     
-                      });     
-                    });    
-                                   
-                    $this.find('.errorDisplayRetriever').hide();
-                });
             });
 
         } // displayError() method
