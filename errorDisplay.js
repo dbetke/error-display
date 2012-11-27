@@ -142,9 +142,6 @@
                 $this.find('.errorDisplayShortMessage').css('color', settings.displayFontColor).html(errorDisplayShortMessage);   
                 $this.find('.errorDisplay').css('background-color', settings.displayBackgroundColor).show();  
                 
-                console.log("height: " + $('.errorDisplayShortMessage').height() + "scrollheight: " + $('.errorDisplayShortMessage')[0].scrollHeight);
-
-
                 if($('.errorDisplayShortMessage').height() < $('.errorDisplayShortMessage')[0].scrollHeight){
                     $this.find('.errorDisplayOverflow').show();
                 }     
