@@ -106,7 +106,8 @@
                         });
                         errorDisplayFlag = 0; //turn off error display flag 
                       }                    
-                    });      
+                    });     
+                    
                 }
                 return this;
             });
@@ -141,6 +142,17 @@
                 $this.find('.errorDisplayShortMessage').css('color', settings.displayFontColor).html(errorDisplayShortMessage);   
                 $this.find('.errorDisplay').css('background-color', settings.displayBackgroundColor).show();  
                 
+                console.log("height: " + $('.errorDisplayShortMessage').height() + "scrollheight: " + $('.errorDisplayShortMessage')[0].scrollHeight);
+
+
+                if($('.errorDisplayShortMessage').height() < $('.errorDisplayShortMessage')[0].scrollHeight){
+                    $this.find('.errorDisplayOverflow').show();
+                }     
+                
+                else{
+                  $this.find('.errorDisplayOverflow').hide();
+                }     
+                 
                   
                if(settings.displayTime != -1){   
                   $this.find('.errorDisplay').slideUp(settings.displayTime, function(){

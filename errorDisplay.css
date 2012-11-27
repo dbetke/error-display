@@ -45,7 +45,6 @@
 .errorDisplayShortMessage{
 	overflow-x: hidden; 
 	overflow-y: hidden;
-	white-space: nowrap;
 	position: absolute;
 	bottom: 0px;
 	left: 0px;
@@ -54,11 +53,12 @@
 	margin-left: 10px;
 	margin-bottom: 5px;
 	display: inline;
+	height: 15px;
 }
 
 .errorDisplayOverflow{
   position: absolute;
-  right: 5px;
+  right: 7px;
   width: 5%;
   bottom: 0px;
   margin-bottom: 5px;
