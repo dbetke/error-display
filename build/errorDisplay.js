@@ -142,15 +142,14 @@
                 $this.find('.errorDisplayShortMessage').css('color', settings.displayFontColor).html(errorDisplayShortMessage);   
                 $this.find('.errorDisplay').css('background-color', settings.displayBackgroundColor).show();  
                 
-                if($('.errorDisplayShortMessage').height() < $('.errorDisplayShortMessage')[0].scrollHeight){
-                    $this.find('.errorDisplayOverflow').show();
-                }     
+                if(($('.errorDisplayShortMessage').height()+ 2) < $('.errorDisplayShortMessage')[0].scrollHeight){
+		    $this.find('.errorDisplayOverflow').show();
+		}     
                 
                 else{
-                  $this.find('.errorDisplayOverflow').hide();
+		    $this.find('.errorDisplayOverflow').hide();
                 }     
-                 
-                  
+		                  
                if(settings.displayTime != -1){   
                   $this.find('.errorDisplay').slideUp(settings.displayTime, function(){
                       $this.find('.errorDisplayRetriever').show();
