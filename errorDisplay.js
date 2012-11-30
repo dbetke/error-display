@@ -15,12 +15,12 @@
     );
     
     var detailDisplayHtml = (
-        ''
-            + '<div class="errorDisplayDetails">'
-            +   '<span class="errorDisplayOptions">'
-            +     '<a href="" class="errorDisplayXButton">&#10006;</a>'
-            +   '</span>'
-            +   '<span class="errorDisplayFullMessageArea"></span>'
+        ''  + '<div class="errorDisplayDetailsOuter">'
+            +   '<a href="" class="errorDisplayDetailsXButton">&#10006;</a>'
+            +     '<div class="errorDisplayDetails">'
+            +       '<span class="errorDisplayOptions"></span>'
+            +       '<span class="errorDisplayFullMessageArea"></span>'
+            +     '</div>'
             + '</div>'
     );
     
@@ -52,7 +52,7 @@
                     var detailDisplayList = $(detailDisplayListHtml);
                     var errorDisplayFlag = 0;  //set error display flag to off
                     
-                    $(detailDisplay).find('.errorDisplayXButton').click(function(event) {
+                    $(detailDisplay).find('.errorDisplayDetailsXButton').click(function(event) {
                         event.preventDefault();
                         $(detailDisplay).hide().find('.errorDisplayOptions').hide();   
                         $this.find('.errorDisplayRetriever').show();

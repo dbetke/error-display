@@ -15,12 +15,12 @@
     );
     
     var detailDisplayHtml = (
-        ''
-            + '<div class="errorDisplayDetails">'
-            +   '<span class="errorDisplayOptions">'
-            +     '<a href="" class="errorDisplayXButton">&#10006;</a>'
-            +   '</span>'
-            +   '<span class="errorDisplayFullMessageArea"></span>'
+        ''  + '<div class="errorDisplayDetailsOuter">'
+            +   '<a href="" class="errorDisplayDetailsXButton">&#10006;</a>'
+            +     '<div class="errorDisplayDetails">'
+            +       '<span class="errorDisplayOptions"></span>'
+            +       '<span class="errorDisplayFullMessageArea"></span>'
+            +     '</div>'
             + '</div>'
     );
     
@@ -52,7 +52,7 @@
                     var detailDisplayList = $(detailDisplayListHtml);
                     var errorDisplayFlag = 0;  //set error display flag to off
                     
-                    $(detailDisplay).find('.errorDisplayXButton').click(function(event) {
+                    $(detailDisplay).find('.errorDisplayDetailsXButton').click(function(event) {
                         event.preventDefault();
                         $(detailDisplay).hide().find('.errorDisplayOptions').hide();   
                         $this.find('.errorDisplayRetriever').show();
@@ -181,4 +181,4 @@
     };
 
 }(jQuery));
-jQuery('head').append(jQuery('<style type="text/css">.errorDisplay { font-family: Helvetica, sans-serif; color: #32446B; background-color: white; text-align: left; font-size: 12px; line-height: 12px; height: 45px; left: 0px; width: inherit; width: expression(this.parentNode.currentStyle[\'width\']); border: solid; border-color: #A9BADE; border-style: ridge; display: none; } .errorDisplayTop{ position: relative; } .errorDisplayBottom{ position: absolute; bottom: 0px; } .errorDisplayRetriever{ height: 8px; background-color: #ff0000; width: 8px; position: absolute; left: 0px; display: none; } .errorDisplayRetrieverTop{ border-bottom-right-radius: 10px; } .errorDisplayRetrieverBottom{ bottom: 0px; border-top-right-radius: 10px;; } .errorDisplayShortMessage{ overflow-x: hidden; overflow-y: hidden; position: absolute; bottom: 0px; left: 0px; width: 90%; margin-top: 20px; margin-left: 10px; margin-bottom: 5px; display: inline; height: 13px; } .errorDisplayOverflow{ position: absolute; right: 7px; width: 5%; bottom: 0px; margin-bottom: 5px; display: none; } .errorDisplayXButton { text-decoration: none; font-size: 15px; margin-top: 2px; position: absolute; right: 3px; top: 0px; color: #4D68A3; } .errorDisplayDetailsButton { margin-left: 10px; margin-right: 10px; position: relative; } .errorDisplayDetails{ position: fixed; top: 25%; height: 100px; width: 75%; text-align: left; border: solid; border-color: #A9BADE; border-style: ridge; background-color: white; display: none; } .errorDisplayFullMessageArea { font-family: Helvetica, sans-serif; font-size: .833em; color: #32446B; height: 80px; width: inherit; width: expression(this.parentNode.currentStyle[\'width\']); position: fixed; margin-top: 15px; } .errorDisplayFullMessageList { overflow: auto; white-space: nowrap; height: 80px; margin-top: 5px; } .errorDisplayOptions{ background-color: #FFFFFF; display: inline; } </style>'));
+jQuery('head').append(jQuery('<style type="text/css">.errorDisplay { font-family: Helvetica, sans-serif; color: #32446B; background-color: white; text-align: left; font-size: 12px; line-height: 12px; height: 45px; left: 0px; width: inherit; width: expression(this.parentNode.currentStyle[\'width\']); border: solid; border-color: #A9BADE; border-style: ridge; display: none; } .errorDisplayTop{ position: relative; } .errorDisplayBottom{ position: absolute; bottom: 0px; } .errorDisplayRetriever{ height: 8px; background-color: #ff0000; width: 8px; position: absolute; left: 0px; display: none; } .errorDisplayRetrieverTop{ border-bottom-right-radius: 10px; } .errorDisplayRetrieverBottom{ bottom: 0px; border-top-right-radius: 10px;; } .errorDisplayShortMessage{ overflow-x: hidden; overflow-y: hidden; position: absolute; bottom: 0px; left: 0px; width: 90%; margin-top: 20px; margin-left: 10px; margin-bottom: 5px; display: inline; height: 13px; } .errorDisplayOverflow{ position: absolute; right: 7px; width: 5%; bottom: 0px; margin-bottom: 5px; display: none; } .errorDisplayXButton { text-decoration: none; font-size: 15px; margin-top: 2px; position: absolute; right: 2px; top: 0px; color: #4D68A3; } .errorDisplayDetailsButton { margin-left: 10px; margin-right: 10px; position: relative; } .errorDisplayDetailsOuter{ position: fixed; top: 25%; left: 25%; width: 630px; height: 100px; display: none; } .errorDisplayDetails{ position: fixed; top: 25%; left: 25%; width: 600px; height: 100px; border: 2px solid #4D68A3; border-radius: 10px; overflow: auto; background-color: white; } .errorDisplayDetailsXButton { border: 2px solid #c2c2c2; position: absolute; right: 0px; top: 0px; padding: 1px 5px; background-color: #4D68A3; border-radius: 20px; text-decoration: none; font-size: 13px; color: white; } .errorDisplayFullMessageArea { font-family: Helvetica, sans-serif; font-size: .833em; color: #32446B; height: 80px; width: inherit; width: expression(this.parentNode.currentStyle[\'width\']); position: fixed; margin-top: 15px; } .errorDisplayFullMessageList { overflow: auto; white-space: nowrap; height: 80px; margin-top: 5px; } .errorDisplayOptions{ background-color: #FFFFFF; display: inline; } </style>'));
