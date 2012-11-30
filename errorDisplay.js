@@ -18,7 +18,6 @@
         ''  + '<div class="errorDisplayDetailsOuter">'
             +   '<a href="" class="errorDisplayDetailsXButton">&#10006;</a>'
             +     '<div class="errorDisplayDetails">'
-            +       '<span class="errorDisplayOptions"></span>'
             +       '<span class="errorDisplayFullMessageArea"></span>'
             +     '</div>'
             + '</div>'
@@ -81,7 +80,6 @@
                         $this.find('.errorDisplay').hide();           
                         $this.find('.errorDisplayRetriever').hide();
                         $(detailDisplay).find('.errorDisplayFullMessageArea').empty().append($(detailDisplayList));
-                        $(detailDisplay).find('.errorDisplayOptions').show();
                         $(detailDisplay).show();                     
                     });
                     
@@ -139,30 +137,36 @@
                 
                 $this.find('.errorDisplayRetriever').hide().css('background-color', settings.displayIndicatorColor);
                 $this.find('.errorDisplayOptions').hide().css('background-color', settings.displayBackgroundColor);
-                $this.find('.errorDisplayShortMessage').css('color', settings.displayFontColor).html(errorDisplayShortMessage);   
-                $this.find('.errorDisplay').css('background-color', settings.displayBackgroundColor).show();  
+                $this.find('.errorDisplayShortMessage').css('color', settings.displayFontColor).html(errorDisplayShortMessage); 
                 
-                //using height + 2 as a workaround due to inexplicable differences between scrollheight and height in some browsers
-                if(($('.errorDisplayShortMessage').height()+ 2) < $('.errorDisplayShortMessage')[0].scrollHeight){
-		              $this.find('.errorDisplayOverflow').show();
-		            }     
-                
-                else{
-		    $this.find('.errorDisplayOverflow').hide();
-                }     
-		                  
-               if(settings.displayTime != -1){   
-                  $this.find('.errorDisplay').slideUp(settings.displayTime, function(){
-                      $this.find('.errorDisplayRetriever').show();
-                  });                              
-              }
-                
-               else{                   
-                   $this.find('.errorDisplayOptions').show();
-                   $this.find('.errorDisplay').show();
-                 }
+                if( $('.errorDisplayDetailsOuter').css("display") == 'none' ){  //only show error display div if details are not open
+
+                    $this.find('.errorDisplay').css('background-color', settings.displayBackgroundColor).show();  
+
+                    //using height + 2 as a workaround due to inexplicable differences between scrollheight and height in some browsers
+                    if(($('.errorDisplayShortMessage').height()+ 2) < $('.errorDisplayShortMessage')[0].scrollHeight){
+                      $this.find('.errorDisplayOverflow').show();
+                    }     
+
+                    else{
+                      $this.find('.errorDisplayOverflow').hide();
+                    }     
+
+                    if(settings.displayTime != -1){   
+                      $this.find('.errorDisplay').slideUp(settings.displayTime, function(){
+                        $this.find('.errorDisplayRetriever').show();
+                      });                              
+                    }
+
+                    else{                   
+                      $this.find('.errorDisplayOptions').show();
+                      $this.find('.errorDisplay').show();
+                    }
+               
+                } 
                 
                 $(data.detailDisplayList).append($('<li>'+fullMessage+'</li>').css('color', settings.displayFontColor));
+                
             });
 
         } // displayError() method
@@ -182,3 +186,5 @@
     };
 
 }(jQuery));
+
+//removed unnecessary error display options call in details display
