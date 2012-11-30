@@ -1,18 +1,18 @@
 .errorDisplay {
-	font-family: Helvetica, sans-serif;
-	color: #32446B;
-	background-color: white;
-	text-align: left; 
-	font-size: 12px;
-	line-height: 12px; 
-	height: 45px; 
-	left: 0px;
-	width: inherit;
-	width: expression(this.parentNode.currentStyle['width']);
-	border: solid;
-	border-color: #A9BADE;
-	border-style: ridge;
-	display: none;
+  font-family: Helvetica, sans-serif;
+  color: #32446B;
+  background-color: white;
+  text-align: left; 
+  font-size: 12px;
+  line-height: 12px; 
+  height: 45px; 
+  left: 0px;
+  width: inherit;
+  width: expression(this.parentNode.currentStyle['width']);
+  border: solid;
+  border-color: #A9BADE;
+  border-style: ridge;
+  display: none;
 }
 
 .errorDisplayTop{
@@ -43,17 +43,17 @@
 }
 
 .errorDisplayShortMessage{
-	overflow-x: hidden; 
-	overflow-y: hidden;
-	position: absolute;
-	bottom: 0px;
-	left: 0px;
-	width: 90%;
-	margin-top: 20px;
-	margin-left: 10px;
-	margin-bottom: 5px;
-	display: inline;
-	height: 13px;
+  overflow-x: hidden; 
+  overflow-y: hidden;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 90%;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-bottom: 5px;
+  display: inline;
+  height: 13px;
 }
 
 .errorDisplayOverflow{
@@ -78,9 +78,9 @@
 } 
 
 .errorDisplayDetailsButton {
-	margin-left: 10px;
-	margin-right: 10px;
-	position: relative;
+  margin-left: 10px;
+  margin-right: 10px;
+  position: relative;
 } 
 
 .errorDisplayDetailsOuter{
@@ -97,38 +97,37 @@
   height: 100px; 
   border: 2px solid #4D68A3; 
   border-radius: 10px;
-  overflow: auto;
   background-color: white;
 }
 
 .errorDisplayDetailsXButton { 
-    border: 2px solid #c2c2c2;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    padding: 1px 5px;
-    background-color: #4D68A3;
-    border-radius: 20px;   
-    text-decoration: none;
-    font-size: 13px;
-    color: white;
+  border: 2px solid #c2c2c2;
+  position: absolute;
+  right: 0px;  
+  top: 0px;
+  padding: 1px 5px;
+  background-color: #4D68A3;
+  border-radius: 20px;   
+  text-decoration: none;
+  font-size: 13px;
+  color: white;
 }
 
 .errorDisplayFullMessageArea {
-	font-family:  Helvetica, sans-serif;
-	font-size: .833em;
-	color: #32446B;
-	height: 80px;
-	width: inherit;
-	width: expression(this.parentNode.currentStyle['width']);
-	margin-top: 15px;
+  font-family:  Helvetica, sans-serif;
+  font-size: .833em;
+  color: #32446B;
+  height: 80px;
+  width: inherit;
+  width: expression(this.parentNode.currentStyle['width']);
+  margin-top: 15px;
 }
 
 .errorDisplayFullMessageList {
-	overflow: auto;
-	white-space: nowrap;
-	height: 80px;
-	margin-top: 5px;
+  overflow: auto;
+  white-space: nowrap;
+  height: 80px;
+  margin-top: 5px;
 }
 
 .errorDisplayOptions{
