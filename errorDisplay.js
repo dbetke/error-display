@@ -73,6 +73,8 @@
                         $this.find('.errorDisplay').slideUp(settings.displayTime, function(){
                             $this.find('.errorDisplayRetriever').show();
                         });
+                        
+                        console.log(event.timestamp);
                     });         
                                      
                     $this.find('.errorDisplayDetailsButton').click(function(event) {
@@ -104,7 +106,7 @@
                         });
                         errorDisplayFlag = 0; //turn off error display flag 
                       }                    
-                    });     
+                    });                  
                     
                 }
                 return this;
@@ -124,6 +126,8 @@
                     }, options);           
                 
                 var errorDisplayShortMessage = (!shortMessage) ? fullMessage : shortMessage;  //use first line of full message if short message does not 
+                var errorDisplayTimestamp = new Date();
+                errorDisplayTimestamp = (errorDisplayTimestamp.getMonth() + 1) + "/" + errorDisplayTimestamp.getDate() + "/" + errorDisplayTimestamp.getFullYear() + " " + errorDisplayTimestamp.toTimeString().substr(0,8);
                 
                 if(settings.displayLocation == 'top'){
                   $this.find('.errorDisplay').removeClass('errorDisplayBottom').addClass('errorDisplayTop');
@@ -164,14 +168,12 @@
                     }
                
                 } 
-                
-                $(data.detailDisplayList).append($('<li>'+fullMessage+'</li>').css('color', settings.displayFontColor));
-                
+
+                $(data.detailDisplayList).append($('<li>'+errorDisplayTimestamp+" " +fullMessage+'</li>').css('color', settings.displayFontColor));
+
             });
 
         } // displayError() method
-
-
     };
 
     $.fn.errorDisplay = function( method ) {
@@ -186,5 +188,3 @@
     };
 
 }(jQuery));
-
-//removed unnecessary error display options call in details display
