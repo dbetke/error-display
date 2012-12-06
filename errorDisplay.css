@@ -134,3 +134,12 @@
   display: inline;
 }
 
+.errorDisplayExpandable{
+  text-decoration: underline;
+}
+
+.errorDisplayExpandedChildren{
+  list-style-type: none;
+  display: none;
+}
+
