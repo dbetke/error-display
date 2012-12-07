@@ -84,12 +84,11 @@
                         $(detailDisplay).find('.errorDisplayFullMessageArea').empty().append($(detailDisplayList));
                         $(detailDisplay).show();       
                         
-                        //this event does not work outside of the details click event - why?
+                        
                         $(detailDisplay).find('.errorDisplayExpandable').click(function(event){
                           event.preventDefault();
                           $(this).nextUntil('.errorDisplayExpandable').toggle();
-                        });
-                        
+                        });                 
                                       
                     });
                     
@@ -115,8 +114,7 @@
                         });
                         errorDisplayFlag = 0; //turn off error display flag 
                       }                    
-                    });    
-                                  
+                    });                                       
                 }
                 return this;
             });
@@ -137,9 +135,26 @@
                 var errorDisplayShortMessage = (!shortMessage) ? fullMessage : shortMessage;  //use first line of full message if short message does not 
                 var errorDisplayTimestamp = new Date();
                 errorDisplayTimestamp = (errorDisplayTimestamp.getMonth() + 1) + "/" + errorDisplayTimestamp.getDate() + "/" + errorDisplayTimestamp.getFullYear() + " " + errorDisplayTimestamp.toTimeString().substr(0,8);
-                   
                 
-                //Set classes based on each definition
+                
+                //process for multi-line messages
+                var splitMsg = fullMessage.split("\n"); 
+                var finalMsg;
+                 
+                if (splitMsg.length > 1){
+                     $(data.detailDisplayList).append($('<li class="errorDisplayExpandable">'+errorDisplayTimestamp+" " +shortMessage+'</li>').css('color', settings.displayFontColor));
+                     
+                      for (var i=0; i<splitMsg.length; i++){
+                        finalMsg = '<li class="errorDisplayExpandedChildren">' +  splitMsg[i] + '</li>';  
+                        $(data.detailDisplayList).append($(finalMsg).css('color', settings.displayFontColor));
+                      }
+                }
+                   
+                else{
+                     $(data.detailDisplayList).append($('<li>'+errorDisplayTimestamp+" " +fullMessage+'</li>').css('color', settings.displayFontColor));
+                }
+        
+      
                 if(settings.displayLocation == 'top'){
                   $this.find('.errorDisplay').removeClass('errorDisplayBottom').addClass('errorDisplayTop');
                   $this.find('.errorDisplayRetriever').removeClass('errorDisplayRetrieverBottom').addClass('errorDisplayRetrieverTop');
@@ -154,9 +169,7 @@
                 $this.find('.errorDisplayOptions').hide().css('background-color', settings.displayBackgroundColor);
                 $this.find('.errorDisplayShortMessage').css('color', settings.displayFontColor).html(errorDisplayShortMessage); 
                 
-                
-                //only show error display div if details are not open
-                if( $('.errorDisplayDetailsOuter').css("display") == 'none' ){  
+                if( $('.errorDisplayDetailsOuter').css("display") == 'none' ){  //only show error display div if details are not open
 
                     $this.find('.errorDisplay').css('background-color', settings.displayBackgroundColor).show();  
 
@@ -182,23 +195,6 @@
                 } 
 
                // $(data.detailDisplayList).append($('<li>'+errorDisplayTimestamp+" " +fullMessage+'</li>').css('color', settings.displayFontColor));
-
-               //Process the message for displaying/hiding multi-lines              
-               var splitMsg = fullMessage.split("\n"); //create an array of messages separated by \n
-               var finalMsg;
-                
-               if (splitMsg.length > 1){
-                    $(data.detailDisplayList).append($('<li class="errorDisplayExpandable">'+errorDisplayTimestamp+" " +shortMessage+'</li>').css('color', settings.displayFontColor));
-                    
-                     for (var i=0; i<splitMsg.length; i++){  //loop through the message array
-                       finalMsg = '<li class="errorDisplayExpandedChildren">' +  splitMsg[i] + '</li>';  
-                       $(data.detailDisplayList).append($(finalMsg).css('color', settings.displayFontColor));
-                     }
-               }
-                  
-               else{
-                    $(data.detailDisplayList).append($('<li>'+errorDisplayTimestamp+" " +fullMessage+'</li>').css('color', settings.displayFontColor));
-               }
 
             });
 
