@@ -28,7 +28,38 @@
             + '<ul class="errorDisplayFullMessageList">'
             + '</ul>'
     );
+
     
+    /** templates **/
+    
+
+
+    var singleLineMessageTemplate = (
+        ' <div class="errorDisplayDetailsListItem">' +
+        '   <span class ="{{class}}">&bull; {{message}}</span>' + 
+	' </div>'
+    );
+
+    
+    var multiLineMessageOuterTemplate = (
+       ' <div class="errorDisplayDetailsListItem">' +
+       '   <div class="errorDisplayDetailsListItemCollapsed"></div>' +
+       '   <div class="errorDisplayDetailsListItemExpanded"></div>' +
+       ' </div>'
+    );
+    
+    var multiLineMessageAdditionalLineTemplate = (
+      ' <span class="{{class}}">{{bullet}} {{message}}</span>'
+    );
+   
+
+    var multiLineMessageFirstLineTemplate = (
+        ' <div class="errorDisplayDetailsListItem">' +
+        '   <span class ="{{class}}">{{bullet}} {{message}}</span>' + 
+	' </div>'
+    );
+
+
     var methods = {
         init : function(options) {
             return this.each(function() {
@@ -140,21 +171,23 @@
                 //process for multi-line messages
                 var splitMsg = fullMessage.split("\n"); 
                 var finalMsg;
-                 
-                if (splitMsg.length > 1){
-                     $(data.detailDisplayList).append($('<li class="errorDisplayExpandable">'+errorDisplayTimestamp+" " +shortMessage+'</li>').css('color', settings.displayFontColor));
-                     
-                      for (var i=0; i<splitMsg.length; i++){
-                        finalMsg = '<li class="errorDisplayExpandedChildren">' +  splitMsg[i] + '</li>';  
-                        $(data.detailDisplayList).append($(finalMsg).css('color', settings.displayFontColor));
-                      }
-                }
-                   
-                else{
-                     $(data.detailDisplayList).append($('<li>'+errorDisplayTimestamp+" " +fullMessage+'</li>').css('color', settings.displayFontColor));
-                }
-        
-      
+                
+                var obj;
+                
+		if (splitMsg.length == 1){
+		    obj = $(Mustache.to_html(singleLineMessageTemplate, {'class' : 'plain', 'bullet' : 'o', 'message' : errorDisplayTimestamp + ' ' + splitMsg[0] })).css('color', settings.displayFontColor).appendTo($(data.detailDisplayList));
+		}
+
+		else{
+		    obj = $(multiLineMessageOuterTemplate).appendTo($(data.detailDisplayList));
+		    obj.find('.errorDisplayDetailsListItemCollapsed').append(Mustache.to_html(multiLineMessageFirstLineTemplate, {'class' : 'collapsed', 'bullet' : '+', 'message' : errorDisplayTimestamp + ' ' + splitMsg[0] })).css('color', settings.displayFontColor);
+		    obj.find('.errorDisplayDetailsListItemExpanded').append(Mustache.to_html(multiLineMessageFirstLineTemplate, {'class' : 'expanded', 'bullet' : '-', 'message' : errorDisplayTimestamp + ' ' + splitMsg[0] })).css('color', settings.displayFontColor);		    
+		    for (var i=1; i<splitMsg.length; i++){
+			obj.find('.errorDisplayDetailsListItemExpanded').append(Mustache.to_html(multiLineMessageAdditionalLineTemplate, {'class' : 'additional', 'bullet' : ' ', 'message' : splitMsg[i] })).css('color', settings.displayFontColor);
+		    }
+		    setupClickHandlers(obj);
+		}
+
                 if(settings.displayLocation == 'top'){
                   $this.find('.errorDisplay').removeClass('errorDisplayBottom').addClass('errorDisplayTop');
                   $this.find('.errorDisplayRetriever').removeClass('errorDisplayRetrieverBottom').addClass('errorDisplayRetrieverTop');
@@ -165,8 +198,8 @@
                   $this.find('.errorDisplayRetriever').removeClass('errorDisplayRetrieverTop').addClass('errorDisplayRetrieverBottom');      
                 }
                 
-                $this.find('.errorDisplayRetriever').hide().css('background-color', settings.displayIndicatorColor);
-                $this.find('.errorDisplayOptions').hide().css('background-color', settings.displayBackgroundColor);
+                $this.find('.errorDisplayRetriever').hide();
+                $this.find('.errorDisplayOptions').hide();
                 $this.find('.errorDisplayShortMessage').css('color', settings.displayFontColor).html(errorDisplayShortMessage); 
                 
                 if( $('.errorDisplayDetailsOuter').css("display") == 'none' ){  //only show error display div if details are not open
@@ -193,6 +226,18 @@
                       $this.find('.errorDisplay').show();
                     }
                 } 
+		
+		function setupClickHandlers(obj){
+		    obj.find('span.expanded').click(function(){
+			    obj.find('.errorDisplayDetailsListItemExpanded').hide();
+			    obj.find('.errorDisplayDetailsListItemCollapsed').show();
+			});
+		    obj.find('span.collapsed').click(function(){
+			    obj.find('.errorDisplayDetailsListItemExpanded').show();
+			    obj.find('.errorDisplayDetailsListItemCollapsed').hide();
+			});
+			
+		}
 
                // $(data.detailDisplayList).append($('<li>'+errorDisplayTimestamp+" " +fullMessage+'</li>').css('color', settings.displayFontColor));
 

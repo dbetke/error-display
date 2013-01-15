@@ -143,3 +143,18 @@
   display: none;
 }*/
 
+span.errorDisplayDetailsPlain{
+  margin-left: 2px;
+}
+
+errorDisplayDetailsListItemCollapsed, errorDisplayDetailsListItemExpanded{
+  display: inline-block;
+}
+
+span.additional{
+margin-left: 10px;
+}
+
+.errorDisplayDetailsListItemExpanded{
+display: none;
+}

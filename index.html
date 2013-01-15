@@ -14,9 +14,10 @@
 
 		</style>
 
-		<script src="lib/jquery/jquery-1.8.2.js"></script>
-        <link rel='stylesheet' type='text/css' href='errorDisplay.css' />
-		<script src="errorDisplay.js"></script>
+		<script src="lib/jquery/jquery-1.8.2.js" type="text/javascript"></script>
+                <link rel='stylesheet' type='text/css' href='errorDisplay.css' />
+		<script src="errorDisplay.js" type="text/javascript"></script>
+                <script src="lib/mustache.js" type="text/javascript"></script> 
 
 		<script>
 		  $(document).ready(function() {
@@ -34,19 +35,19 @@
             var randomErrors = [
                 {
                     short : "Illegal Operation",
-                    full  : "The program has performed an illegal operation and will be shut down"
+                    full  : "The program has performed an illegal \n operation and will be shut down"
                 },
                 {
                     short : "Audio Error",
-                    full  : "Data or no disk loaded when trying to play an audio CD"
+                    full  : "Data or no disk loaded when trying \n to play an audio CD"
                 },
-                {
+               {
                     short : "He's Dead Jim",
                     full  : "Device is not responding"
                 },
                 {
                     short : "Dial-Up",
-                    full  : "Dial-Up Networking could not negotiate a compatible set of protocols"
+                    full  : "Dial-Up Networking could not negotiate a \n compatible set of protocols"
                 },
                 {
                     short : "Disk Init Error",
@@ -58,11 +59,11 @@
                 },
                 {
                     short : "Drive in Use",
-                    full  : "Drive X is in use by a local drive"
+                    full  : "Drive X is in \n use by a local drive"
                 },
                 {
                     short : "Schedule Access",
-                    full  : "Could not access schedule information"
+                    full  : "Could not access \n schedule information"
                 },
                 {
                     short : "Additional Data",
@@ -70,7 +71,7 @@
                 },
                 {
                     short : "Essential File",
-                    full  : "An Essential File Is Missing"
+                    full  : "An Essential File \n Is Missing"
                 },
                 {
                     short : "Deletion Failed",
@@ -78,15 +79,15 @@
                 },
                 {
                     short : "Missing Object Handler",
-                    full  : "Problem Locating Object Handler"
+                    full  : "Problem Locating Object \n Handler"
                 },
                 {
                     short : "User List Unavailable",
-                    full  : "You Cannot View The List of Users at This Time"
+                    full  : "You Cannot View The List of \n Users at This Time"
                 },
                 {
                     short : "Error Renaming File",
-                    full  : "Error Renaming File. Cannot rename C:\filename"
+                    full  : "Error Renaming File. Cannot \n rename C:\filename"
                 },
                 {
                     short : "Out of Memory",
@@ -106,7 +107,7 @@
 
             $('#submitRandomWarning').click(function() {
                 var i = Math.floor(Math.random()*randomErrors.length);
-                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short, {'displayIndicatorColor' : '#00ff00'});
+                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short, {'displayIndicatorColor' : '#00ff00', 'displayBackgroundColor' : '#fff0ff'});
                 return false;
             });
 
