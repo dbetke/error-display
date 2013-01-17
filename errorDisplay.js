@@ -8,7 +8,7 @@
             +     '<button class="errorDisplayDetailsButton">See Details</button>'
             +     '<a href="" class="errorDisplayXButton">&#10006;</a>'
             +   '</span>'
-            +   '<span class="errorDisplayShortMessage"></span>'
+            +   '<span class="errorDisplaySummary"></span>'
             +   '<span class="errorDisplayOverflow">...</span>'
             + '</div>'
             + '<span class="errorDisplayRetriever"></span>'
@@ -153,7 +153,7 @@
             });
         }, // init() method
         
-        displayError : function(fullMessage, shortMessage, options) {
+        displayError : function(message, summary, options) {
             return this.each(function() {
                 var $this = $(this),
                     data = $this.data('errorDisplay'),
@@ -165,13 +165,13 @@
                         'displayLocation' : data.displayLocation
                     }, options);           
                 
-                var errorDisplayShortMessage = (!shortMessage) ? fullMessage : shortMessage;  //use first line of full message if short message does not 
+                var errorDisplaySummary = (!summary) ? message : summary;  //use first line of full message if short message does not 
                 var errorDisplayTimestamp = new Date();
                 errorDisplayTimestamp = (errorDisplayTimestamp.getMonth() + 1) + "/" + errorDisplayTimestamp.getDate() + "/" + errorDisplayTimestamp.getFullYear() + " " + errorDisplayTimestamp.toTimeString().substr(0,8);
                 
                 
                 //process for multi-line messages
-                var splitMsg = fullMessage.split("\n"); 
+                var splitMsg = message.split("\n"); 
                 var finalMsg;
                 
                 var obj;
@@ -195,7 +195,7 @@
 
 		else{
 		    obj = $(multiLineMessageOuterTemplate).appendTo($(data.detailDisplayList));
-		    obj.find('.errorDisplayDetailsListItemCollapsed').append(Mustache.to_html(multiLineMessageFirstLineTemplate, {'class' : 'collapsed', 'bullet' : '+', 'message' : errorDisplayTimestamp + ' ' + splitMsg[0] })).css('color', settings.displayFontColor);
+		    obj.find('.errorDisplayDetailsListItemCollapsed').append(Mustache.to_html(multiLineMessageFirstLineTemplate, {'class' : 'collapsed', 'bullet' : '+', 'message' : errorDisplayTimestamp + ' ' + errorDisplaySummary })).css('color', settings.displayFontColor);
 		    obj.find('.errorDisplayDetailsListItemExpanded').append(Mustache.to_html(multiLineMessageFirstLineTemplate, {'class' : 'expanded', 'bullet' : '-', 'message' : errorDisplayTimestamp + ' ' + splitMsg[0] })).css('color', settings.displayFontColor);		    
 		    for (var i=1; i<splitMsg.length; i++){
 			obj.find('.errorDisplayDetailsListItemExpanded').append(Mustache.to_html(multiLineMessageAdditionalLineTemplate, {'class' : 'additional', 'bullet' : ' ', 'message' : splitMsg[i] })).css('color', settings.displayFontColor);
@@ -216,14 +216,14 @@
                 
                 $this.find('.errorDisplayRetriever').hide();
                 $this.find('.errorDisplayOptions').hide();
-                $this.find('.errorDisplayShortMessage').css('color', settings.displayFontColor).html(errorDisplayShortMessage); 
+                $this.find('.errorDisplaySummary').css('color', settings.displayFontColor).html(errorDisplaySummary); 
                 
                 if( $('.errorDisplayDetailsOuter').css("display") == 'none' ){  //only show error display div if details are not open
 
                     $this.find('.errorDisplay').css('background-color', settings.displayBackgroundColor).show();  
 
                     //using height + 2 as a workaround due to inexplicable differences between scrollheight and height in some browsers
-                    if(($('.errorDisplayShortMessage').height()+ 2) < $('.errorDisplayShortMessage')[0].scrollHeight){
+                    if(($('.errorDisplaySummary').height()+ 2) < $('.errorDisplaySummary')[0].scrollHeight){
                       $this.find('.errorDisplayOverflow').show();
                     }     
 
@@ -243,9 +243,6 @@
                     }
                 } 
 		
-
-               // $(data.detailDisplayList).append($('<li>'+errorDisplayTimestamp+" " +fullMessage+'</li>').css('color', settings.displayFontColor));
-
             });
 
         } // displayError() method

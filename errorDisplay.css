@@ -41,7 +41,7 @@
   border-top-right-radius: 10px;;
 }
 
-.errorDisplayShortMessage{
+.errorDisplaySummary{
   overflow-x: hidden; 
   overflow-y: hidden;
   position: absolute;
