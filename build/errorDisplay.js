@@ -73,6 +73,7 @@
                         'displayLocation' : 'bottom'
                     }, options);
                 
+
                 if ( ! data ) {
                     
                     $this.append(errorDisplayHtml);
@@ -81,6 +82,7 @@
                     var detailDisplay = $(detailDisplayHtml).appendTo($("body"));
                     var detailDisplayList = $(detailDisplayListHtml);
                     var errorDisplayFlag = 0;  //set error display flag to off
+
                     
                     $(detailDisplay).find('.errorDisplayDetailsXButton').click(function(event) {
                         event.preventDefault();
@@ -112,8 +114,8 @@
                         event.preventDefault(); 
                         $this.find('.errorDisplay').hide();           
                         $this.find('.errorDisplayRetriever').hide();
-                        $(detailDisplay).find('.errorDisplayFullMessageArea').empty().append($(detailDisplayList));
-                        $(detailDisplay).show();       
+			$(detailDisplay).find('.errorDisplayFullMessageArea').append($(detailDisplayList));
+			$(detailDisplay).show();       
                         
                         
                         $(detailDisplay).find('.errorDisplayExpandable').click(function(event){
@@ -173,7 +175,20 @@
                 var finalMsg;
                 
                 var obj;
-                
+
+		function setupClickHandlers(obj){
+		   obj.find('span.expanded').click(function(){
+		       obj.find('.errorDisplayDetailsListItemExpanded').hide();
+		       obj.find('.errorDisplayDetailsListItemCollapsed').show();
+		   });
+		
+		   obj.find('span.collapsed').click(function(){
+		       obj.find('.errorDisplayDetailsListItemExpanded').show();
+		       obj.find('.errorDisplayDetailsListItemCollapsed').hide();
+	           });
+	        }
+	       
+
 		if (splitMsg.length == 1){
 		    obj = $(Mustache.to_html(singleLineMessageTemplate, {'class' : 'plain', 'bullet' : 'o', 'message' : errorDisplayTimestamp + ' ' + splitMsg[0] })).css('color', settings.displayFontColor).appendTo($(data.detailDisplayList));
 		}
@@ -187,6 +202,7 @@
 		    }
 		    setupClickHandlers(obj);
 		}
+
 
                 if(settings.displayLocation == 'top'){
                   $this.find('.errorDisplay').removeClass('errorDisplayBottom').addClass('errorDisplayTop');
@@ -227,17 +243,6 @@
                     }
                 } 
 		
-		function setupClickHandlers(obj){
-		    obj.find('span.expanded').click(function(){
-			    obj.find('.errorDisplayDetailsListItemExpanded').hide();
-			    obj.find('.errorDisplayDetailsListItemCollapsed').show();
-			});
-		    obj.find('span.collapsed').click(function(){
-			    obj.find('.errorDisplayDetailsListItemExpanded').show();
-			    obj.find('.errorDisplayDetailsListItemCollapsed').hide();
-			});
-			
-		}
 
                // $(data.detailDisplayList).append($('<li>'+errorDisplayTimestamp+" " +fullMessage+'</li>').css('color', settings.displayFontColor));
 
