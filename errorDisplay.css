@@ -29,7 +29,8 @@
   width: 8px; 
   position: absolute;
   left: 0px;
-  display: none;
+  display: none; 
+  cursor: hand; cursor: pointer; //handles cross-browser
 }
 
 .errorDisplayRetrieverTop{
@@ -73,6 +74,7 @@
   right: 2px;
   top: 0px;
   color: #4D68A3;
+  cursor: hand; cursor: pointer; //handles cross-browser
 
 } 
 
@@ -80,6 +82,7 @@
   margin-left: 10px;
   margin-right: 10px;
   position: relative;
+  cursor: hand; cursor: pointer; //handles cross-browser
 } 
 
 .errorDisplayDetailsOuter{
@@ -134,15 +137,6 @@
   display: inline;
 }
 
-/*.errorDisplayExpandable{
-  text-decoration: underline;
-}
-
-.errorDisplayExpandedChildren{
-  list-style-type: none;
-  display: none;
-}*/
-
 span.errorDisplayDetailsPlain{
   margin-left: 2px;
 }
@@ -152,9 +146,13 @@ errorDisplayDetailsListItemCollapsed, errorDisplayDetailsListItemExpanded{
 }
 
 span.additional{
-margin-left: 10px;
+  margin-left: 10px;
 }
 
-.errorDisplayDetailsListItemExpanded{
-display: none;
+.errorDisplayDetailsListItemExpanded{ 
+  display: none;
+}
+
+span.expanded, span.collapsed{
+  cursor: hand; cursor: pointer; //handles cross-browser
 }
