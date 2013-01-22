@@ -101,7 +101,7 @@
 
             $('#submitRandomError').click(function() {
                 var i = Math.floor(Math.random()*randomErrors.length);
-                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short, {'displayIndicatorColor' : '#000000', 'displayFontColor' : '#000000', 'displayTime' : '-1', 'displayLocation' : 'top'}); 
+                $('#testContainer').errorDisplay("displayError", randomErrors[i].full, randomErrors[i].short, {'displayDetailsSize' : '300', 'displayIndicatorColor' : '#000000', 'displayFontColor' : '#000000', 'displayTime' : '-1', 'displayLocation' : 'top'}); 
                 return false;
             });
 

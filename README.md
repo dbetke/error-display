@@ -34,8 +34,9 @@ Call error display
 
         displayTime: '',            //defaults to 1000 (hides after 1 second, can change time or set to -1 to keep on screen)
 
-        displayLocation: ''         //defaults to bottom of div, only valid alternative is 'top'
+        displayLocation: '',        //defaults to bottom of div, only valid alternative is 'top'
 
+	displayDetailsSize: ''	    //defaults to 200
     });
 
 

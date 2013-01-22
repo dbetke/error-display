@@ -70,7 +70,8 @@
                         'displayBackgroundColor' : '#ffffff',
                         'displayTime' : 1000,
                         'displayIndicatorColor' : '#ff0000',
-                        'displayLocation' : 'bottom'
+                        'displayLocation' : 'bottom',
+			'displayDetailsSize' : 200
                     }, options);
                 
 
@@ -97,8 +98,9 @@
                         'displayBackgroundColor' : settings.displayBackgroundColor,
                         'displayTime' : settings.displayTime,
                         'displayIndicatorColor' : settings.displayIndicatorColor,
-                        'displayLocation' : settings.displayLocation
-                    });
+			'displayLocation' : settings.displayLocation,
+			'displayDetailsSize' : settings.displayDetailsSize 
+		    });
 
                     $this.find('.errorDisplayXButton').click(function(event) {
                         event.preventDefault(); 
@@ -162,7 +164,8 @@
                         'displayBackgroundColor' : data.displayBackgroundColor,
                         'displayTime' : data.displayTime,
                         'displayIndicatorColor' : data.displayIndicatorColor,
-                        'displayLocation' : data.displayLocation
+                        'displayLocation' : data.displayLocation,
+			'displayDetailsSize' : data.displayDetailsSize
                     }, options);           
                 
                 var errorDisplaySummary = (!summary) ? message : summary;  //use first line of full message if short message does not 
@@ -187,8 +190,7 @@
 		       obj.find('.errorDisplayDetailsListItemCollapsed').hide();
 	           });
 	        }
-	       
-
+		
 		if (splitMsg.length == 1){
 		    obj = $(Mustache.to_html(singleLineMessageTemplate, {'class' : 'plain', 'bullet' : 'o', 'message' : errorDisplayTimestamp + ' ' + splitMsg[0] })).css('color', settings.displayFontColor).appendTo($(data.detailDisplayList));
 		}
@@ -202,6 +204,9 @@
 		    }
 		    setupClickHandlers(obj);
 		}
+		
+		$('.errorDisplayDetails').css('height',  settings.displayDetailsSize); //set details display size according to specifications
+		$('.errorDisplayFullMessageList').css('height', settings.displayDetailsSize*.9); //set message list size to 90% of details display size
 
 
                 if(settings.displayLocation == 'top'){
