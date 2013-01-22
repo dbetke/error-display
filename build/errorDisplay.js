@@ -222,10 +222,14 @@
                 $this.find('.errorDisplayRetriever').hide();
                 $this.find('.errorDisplayOptions').hide();
                 $this.find('.errorDisplaySummary').css('color', settings.displayFontColor).html(errorDisplaySummary); 
-                
+		
+		//set background color as configured, also sets options div background color for space around button
+		$this.find('.errorDisplayOptions').css('background-color', settings.displayBackgroundColor);
+		$this.find('.errorDisplay').css('background-color', settings.displayBackgroundColor);
+
                 if( $('.errorDisplayDetailsOuter').css("display") == 'none' ){  //only show error display div if details are not open
 
-                    $this.find('.errorDisplay').css('background-color', settings.displayBackgroundColor).show();  
+                    $this.find('.errorDisplay').show();  
 
                     //using height + 2 as a workaround due to inexplicable differences between scrollheight and height in some browsers
                     if(($('.errorDisplaySummary').height()+ 2) < $('.errorDisplaySummary')[0].scrollHeight){
