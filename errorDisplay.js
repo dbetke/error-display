@@ -11,7 +11,9 @@
             +   '<span class="errorDisplaySummary"></span>'
             +   '<span class="errorDisplayOverflow">...</span>'
             + '</div>'
-            + '<span class="errorDisplayRetriever"></span>'
+	    + '<div class="errorDisplayRetrieverOuter">'
+	    +    '<span class="errorDisplayRetriever"></span>'
+	    + '</div>'
     );
     
     var detailDisplayHtml = (
@@ -128,7 +130,7 @@
                     });
                     
                     
-                    $this.find('.errorDisplayRetriever').hover(function(event) {
+                    $this.find('.errorDisplayRetrieverOuter').hover(function(event) {
                         event.preventDefault();
                         errorDisplayFlag = 1;  //turn on error display flag
                           $this.find('.errorDisplayRetriever').hide();
@@ -212,11 +214,17 @@
                 if(settings.displayLocation == 'top'){
                   $this.find('.errorDisplay').removeClass('errorDisplayBottom').addClass('errorDisplayTop');
                   $this.find('.errorDisplayRetriever').removeClass('errorDisplayRetrieverBottom').addClass('errorDisplayRetrieverTop');
+		  //attributes for ease with mobile devices
+		  $this.find('.errorDisplayRetrieverOuter').removeClass('errorDisplayRetrieverBottom').addClass('errorDisplayRetrieverTop');
+		  $this.find('.errorDisplayRetrieverOuter').removeClass('errorDisplayBottom').addClass('errorDisplayTop');
                 }
                 
                 else{ 
                   $this.find('.errorDisplay').removeClass('errorDisplayTop').addClass('errorDisplayBottom');
-                  $this.find('.errorDisplayRetriever').removeClass('errorDisplayRetrieverTop').addClass('errorDisplayRetrieverBottom');      
+                  $this.find('.errorDisplayRetriever').removeClass('errorDisplayRetrieverTop').addClass('errorDisplayRetrieverBottom');
+		  //attributes for ease with mobile devices 
+		  $this.find('.errorDisplayRetrieverOuter').removeClass('errorDisplayTop').addClass('errorDisplayBottom');
+		  $this.find('.errorDisplayRetrieverOuter').removeClass('errorDisplayRetrieverTop').addClass('errorDisplayRetrieverBottom');
                 }
                 
                 $this.find('.errorDisplayRetriever').hide();

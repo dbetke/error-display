@@ -25,12 +25,17 @@
 
 .errorDisplayRetriever{
   height: 8px;
-  background-color: #ff0000;
+ background-color: #ff0000;
   width: 8px; 
   position: absolute;
   left: 0px;
   display: none; 
   cursor: hand; cursor: pointer; //handles cross-browser
+}
+
+.errorDisplayRetrieverOuter{
+ height: 25px;
+ width: 25px;
 }
 
 .errorDisplayRetrieverTop{
@@ -66,7 +71,11 @@
   
 }
 
+/* x button width and height set larger for mobile devices */
 .errorDisplayXButton { 
+  width: 25px;  
+  height: 25px; 
+  text-align: right;
   text-decoration: none;
   font-size: 15px;
   margin-top: 2px;
