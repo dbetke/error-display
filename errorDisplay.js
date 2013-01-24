@@ -84,7 +84,7 @@
                     
                     var detailDisplay = $(detailDisplayHtml).appendTo($("body"));
                     var detailDisplayList = $(detailDisplayListHtml);
-                    //var errorDisplayFlag = 0;  //set error display flag to off (for mouseleave function)
+                    var errorDisplayFlag = 0;  //set error display flag to off (for mouseleave function)
 
                     $this.data('errorDisplay', {
                         'detailDisplay' : detailDisplay,
@@ -124,11 +124,10 @@
 			    $this.find('.errorDisplayRetriever').hide();
 			    $this.find('.errorDisplay').show(0, function(){
 				$this.find('.errorDisplayOptions').show();
-			        //errorDisplayFlag = 1; //turn on error display flag after show function is complete (for mouseleave function)
+			        errorDisplayFlag = 1; //turn on error display flag after show function is complete (for mouseleave function)
 			    });  
      		    });
 		   
-/*** REMOVE MOUSE LEAVE FUNCTION?  IF HOVERED, HAVE TO X OUT 
 		    $this.find('.errorDisplay').mouseleave(function(event){
 			    if(errorDisplayFlag){
 				$this.find('.errorDisplay').hide();
@@ -138,7 +137,6 @@
 				errorDisplayFlag = 0; //turn off error display flag after hide function is complete
 			    }
 		    });
-END OF REMOVE MOUSE LEAVE FUNCTION *****/
 
                 }
                 return this;
