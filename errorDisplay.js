@@ -154,16 +154,14 @@
                         'displayIndicatorColor' : data.displayIndicatorColor,
                         'displayLocation' : data.displayLocation,
 			'displayDetailsSize' : data.displayDetailsSize
-                    }, options);           
-                
-                var errorDisplaySummary = (!summary) ? message : summary;  //use first line of full message if short message does not 
-                var errorDisplayTimestamp = new Date();
-                errorDisplayTimestamp = (errorDisplayTimestamp.getMonth() + 1) + "/" + errorDisplayTimestamp.getDate() + "/" + errorDisplayTimestamp.getFullYear() + " " + errorDisplayTimestamp.toTimeString().substr(0,8);
-                
+                    }, options);                 
                 
                 //process for multi-line messages
                 var splitMsg = message.split("\n"); 
-                var finalMsg;
+		var errorDisplaySummary = (!summary) ? splitMsg[0] : summary;  //use first line of full message if short message does not 
+                var errorDisplayTimestamp = new Date();
+                errorDisplayTimestamp = (errorDisplayTimestamp.getMonth() + 1) + "/" + errorDisplayTimestamp.getDate() + "/" + errorDisplayTimestamp.getFullYear() + " " + errorDisplayTimestamp.toTimeString().substr(0,8);
+          
                 
                 var obj;
 

@@ -104,7 +104,6 @@
 
 .errorDisplayDetails{
   width: 600px; 
-  //height: 100px; 
   border: 2px solid #4D68A3; 
   border-radius: 10px;
   background-color: white;
@@ -124,8 +123,11 @@
 }
 
 .errorDisplayFullMessageList {
-  overflow: auto;
-  white-space: nowrap;
+  //overflow: auto;  //removed to have horizontal wrapping
+  //white-space: nowrap;
+  padding-left: 5px;
+  overflow-x: hidden;
+  overflow-y: auto;
   margin-top: 5px;
   font-family:  Helvetica, sans-serif;
   font-size: .833em;
@@ -156,5 +158,5 @@ span.additional{
 }
 
 span.expanded, span.collapsed{
-  cursor: hand; cursor: pointer; //handles cross-browser
+  cursor: hand; cur	sor: pointer; //handles cross-browser
 }
