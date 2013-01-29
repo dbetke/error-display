@@ -149,14 +149,18 @@ errorDisplayDetailsListItemCollapsed, errorDisplayDetailsListItemExpanded{
   display: inline-block;
 }
 
-span.additional{
-  margin-left: 10px;
-}
-
 .errorDisplayDetailsListItemExpanded{ 
   display: none;
 }
 
 span.expanded, span.collapsed{
-  cursor: hand; cur	sor: pointer; //handles cross-browser
+  cursor: hand; cursor: pointer; //handles cross-browser
+}
+
+span.expanded, span.collapsed, span.plain, span.additional{
+display: block;
+float: left;
+clear: left;
+width: 20px;
+list-style-type: none;
 }

@@ -38,7 +38,7 @@
 
     var singleLineMessageTemplate = (
         ' <div class="errorDisplayDetailsListItem">' +
-        '   <span class ="{{class}}">&bull; {{message}}</span>' + 
+        '   <span class ="{{class}}">{{bullet}}</span><span> {{message}}</span>' + 
 	' </div>'
     );
 
@@ -51,16 +51,18 @@
     );
     
     var multiLineMessageAdditionalLineTemplate = (
-      ' <span class="{{class}}">{{bullet}} {{message}}</span>'
+      ' <div class="errorDisplayDetailsListItem"><span class="additional">{{{bullet}}}</span><span>{{message}}</span></div>'
     );
    
 
     var multiLineMessageFirstLineTemplate = (
         ' <div class="errorDisplayDetailsListItem">' +
-        '   <span class ="{{class}}">{{bullet}} {{message}}</span>' + 
+        '   <span class ={{class}}>{{{bullet}}}</span><span> {{message}}</span>' + 
 	' </div>'
     );
 
+    //span classes used: plain, collapsed, expanded, and additional
+    //bullets used: -, +, o
 
     var methods = {
         init : function(options) {
@@ -186,7 +188,7 @@
 		    obj.find('.errorDisplayDetailsListItemCollapsed').append(Mustache.to_html(multiLineMessageFirstLineTemplate, {'class' : 'collapsed', 'bullet' : '+', 'message' : errorDisplayTimestamp + ' ' + errorDisplaySummary })).css('color', settings.displayFontColor);
 		    obj.find('.errorDisplayDetailsListItemExpanded').append(Mustache.to_html(multiLineMessageFirstLineTemplate, {'class' : 'expanded', 'bullet' : '-', 'message' : errorDisplayTimestamp + ' ' + splitMsg[0] })).css('color', settings.displayFontColor);		    
 		    for (var i=1; i<splitMsg.length; i++){
-			obj.find('.errorDisplayDetailsListItemExpanded').append(Mustache.to_html(multiLineMessageAdditionalLineTemplate, {'class' : 'additional', 'bullet' : ' ', 'message' : splitMsg[i] })).css('color', settings.displayFontColor);
+			obj.find('.errorDisplayDetailsListItemExpanded').append(Mustache.to_html(multiLineMessageAdditionalLineTemplate, {'message' : splitMsg[i], 'bullet' : '&nbsp;' })).css('color', settings.displayFontColor);
 		    }
 		    setupClickHandlers(obj);
 		}
